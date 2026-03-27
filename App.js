@@ -4,7 +4,7 @@ import { StyleSheet, Text, View } from 'react-native';
 export default function App() {
   return (
     <View style={styles.container}>
-      <Text>Mudei o nome de novo !!!!</Text>
+      <Text>Core</Text>
       <StatusBar style="auto" />
     </View>
   );
