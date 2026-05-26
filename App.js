@@ -9,11 +9,20 @@ export default function App() {
     const apenasLetras = /^[a-zA-Z]+$/;
 
     if(apenasLetras.test(username) == false){
-      setErro('Username deve possuir apenas letras')
+      setErro('Username deve possuir apenas letras');
+      return;
+    }else{
+      setErro(undefined);
+    }
+
+    if(username.length < 3){
+      setErro('Username deve possuir pelo menos 3 letras');
       return;
     }else{
       setErro(undefined)
     }
+
+    alert('Username Gravado')
   }
 
 
