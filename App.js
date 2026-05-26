@@ -2,14 +2,27 @@ import { useState } from 'react';
 import { StyleSheet, Text, View } from 'react-native';
 
 export default function App() {
-  const [nome, setNome] = useState('')
+  const [username, setusername] = useState('');
+
+  const[erro, setErro] = useState(undefined);
+  function validar(){
+    const apenasLetras = /^[a-zA-Z]+$/;
+
+    if(apenasLetras.test(username) == false){
+      setErro('Username deve possuir apenas letras')
+      return;
+    }else{
+      setErro(undefined)
+    }
+  }
+
 
   return (
      <View style={styles.container}>
       <TextInput 
-        placeholder='Digite seu nome'
-        onChangeText={setNome}
-        value={nome}
+        placeholder='Digite seu username'
+        onChangeText={setusername}
+        value={username}
         style={{borderWidth: 1, width: 200, marginVertical: 10, padding: 5}}/>
 
       {/*Exibe o Text apenas se a variavel erro for diferente de undefined*/}
