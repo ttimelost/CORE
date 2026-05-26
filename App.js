@@ -2,23 +2,23 @@ import { useState } from 'react';
 import { StyleSheet, Text, View } from 'react-native';
 
 export default function App() {
-  const [username, setusername] = useState('');
+  const [username, setUsername] = useState('');
 
-  const[erro, setErro] = useState(undefined);
-  function validar(){
+  const [erro, setErro] = useState(undefined);
+  function validar() {
     const apenasLetras = /^[a-zA-Z]+$/;
 
-    if(apenasLetras.test(username) == false){
+    if (apenasLetras.test(username) == false) {
       setErro('Username deve possuir apenas letras');
       return;
-    }else{
+    } else {
       setErro(undefined);
     }
 
-    if(username.length < 3){
+    if (username.length < 3) {
       setErro('Username deve possuir pelo menos 3 letras');
       return;
-    }else{
+    } else {
       setErro(undefined)
     }
 
@@ -26,18 +26,30 @@ export default function App() {
   }
 
 
-  return (
-     <View style={styles.container}>
-      <TextInput 
-        placeholder='Digite seu username'
-        onChangeText={setusername}
+ return (
+    <View style={styles.container}>
+      <TextInput
+        placeholder="Digite seu username"
+        onChangeText={setUsername}
         value={username}
-        style={{borderWidth: 1, width: 200, marginVertical: 10, padding: 5}}/>
+        style={{
+          borderWidth: 1,
+          width: 200,
+          marginVertical: 10,
+          padding: 5,
+        }}
+      />
 
-      {/*Exibe o Text apenas se a variavel erro for diferente de undefined*/}
-      {{erro} && <Text style={{color: 'red'}}>{erro}</Text>}
-      
-      <Button title='Validar' onPress={validar}/>
+      {erro && (
+        <Text style={{ color: 'red' }}>
+          {erro}
+        </Text>
+      )}
+
+      <Button
+        title="Validar"
+        onPress={validar}
+      />
     </View>
   );
 }
