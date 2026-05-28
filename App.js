@@ -31,11 +31,7 @@ export default function App() {
 
   return (
     <View style={styles.tudo}>
-
-      <View style={styles.LogoTitulo}>
-        <Image style={styles.icon} source={require("./assets/images/icone.png")} />
-      </View>
-
+      <Image style={styles.icon} source={require("./assets/images/icone.png")} />
       <View style={styles.container}>
         <Text style={styles.dica}>Nome de usuário</Text>
         <TextInput
@@ -58,7 +54,7 @@ export default function App() {
         {erro && <Text style={styles.error}>{erro}</Text>}
 
       </View>
-      <Button title="Avançar" onPress={validar} color="#10B981" />
+      <Button title="Avançar" onPress={validar} color="#10B981" style={button}/>
     </View>
   );
 }
@@ -68,25 +64,25 @@ const styles = StyleSheet.create({
     flex: 1,
     backgroundColor: "#121315",
     alignItems: "center",
-    justifyContent: "center",
+    justifyContent: "flex-start",
     paddingHorizontal: 16,
+    paddingTop: 40,
   },
   container: {
     width: "100%",
     maxWidth: 360,
-    alignItems: "flex-start",
-    justifyContent: "center",
-  },
-  LogoTitulo: {
-    flexDirection: "column",
     alignItems: "center",
     justifyContent: "center",
-    marginBottom: 30,
+    flex: 1,
   },
+
   icon: {
-    width: 40,
-    height: 40,
+    width: 60,
+    height: 60,
     marginLeft: 10,
+    flexDirection: "column",
+    alignItems: "center",
+    marginBottom: 30,
   },
   titulo: {
     fontWeight: 'bold',
@@ -107,11 +103,18 @@ const styles = StyleSheet.create({
     color: "red",
     marginBottom: 10,
     width: "85%",
+    alignSelf: "flex-start",
+    marginLeft: "7.5%",
   },
   dica: {
     color: "#fff",
     fontWeight: 600,
     width: "85%",
     marginVertical: 5,
+    alignSelf: "flex-start",
+    marginLeft: "7.5%",
+  },
+  button:{
+    
   }
 });
