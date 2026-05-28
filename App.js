@@ -54,7 +54,7 @@ export default function App() {
         {erro && <Text style={styles.error}>{erro}</Text>}
 
       </View>
-      <Button title="Avançar" onPress={validar} color="#10B981" style={button}/>
+      <Button title="Avançar" onPress={validar} color="#10B981"/>
     </View>
   );
 }
@@ -114,7 +114,4 @@ const styles = StyleSheet.create({
     alignSelf: "flex-start",
     marginLeft: "7.5%",
   },
-  button:{
-    
-  }
 });
