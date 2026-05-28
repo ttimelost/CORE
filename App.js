@@ -57,7 +57,7 @@ export default function App() {
 
         {erro && <Text style={styles.error}>{erro}</Text>}
 
-        <Button title="Validar" onPress={validar} />
+        <Button title="Login" onPress={validar} />
       </View>
     </View>
   );
@@ -76,7 +76,7 @@ const styles = StyleSheet.create({
     justifyContent: "center",
   },
   LogoTitulo: {
-    flexDirection: "row",
+    flexDirection: "column",
     alignItems: "center",
     justifyContent: "center",
     marginBottom: 30,
