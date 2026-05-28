@@ -60,7 +60,7 @@ export default function App() {
 
           {erro && <Text style={styles.error}>{erro}</Text>}
 
-          <Button title="Avançar" onPress={validar} color="" />
+          <Button title="Avançar" onPress={validar} color="#10B981" />
         </View>
       </View>
     </View>
@@ -70,12 +70,13 @@ export default function App() {
 const styles = StyleSheet.create({
   tudo: {
     flex: 1,
-    backgroundColor: "#f5f5f5",
+    backgroundColor: "#121315",
     alignItems: "center",
     justifyContent: "center",
+    paddingHorizontal: 16,
   },
   container: {
-    width: 280,
+    width: "100%",
     alignItems: "center",
     justifyContent: "center",
   },
@@ -97,7 +98,7 @@ const styles = StyleSheet.create({
   },
   input: {
     borderWidth: 1,
-    width: 240,
+    width: "100%",
     marginVertical: 10,
     padding: 10,
     borderRadius: 8,
@@ -111,9 +112,9 @@ const styles = StyleSheet.create({
     textAlign: "center",
   },
   CaixaLogin: {
-    backgroundColor: "#121315",
+    backgroundColor: "#3c3f46",
     borderRadius: 25,
     padding: 20,
-    textColor: "#fff",
+    textColor: "#121315",
   },
 });
