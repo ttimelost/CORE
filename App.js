@@ -6,63 +6,59 @@ export default function App() {
   const [password, setPassword] = useState("");
 
   const [erro, setErro] = useState(undefined);
+
   function validar() {
     const apenasLetras = /^[a-zA-Z]+$/;
 
-    if (apenasLetras.test(username) == false) {
+    if (!apenasLetras.test(username)) {
       setErro("Username deve possuir apenas letras");
       return;
-    } else {
-      setErro(undefined);
     }
 
     if (username.length < 3) {
       setErro("Username deve possuir pelo menos 3 letras");
       return;
-    } else {
-      setErro(undefined);
     }
 
     if (password.length < 8) {
       setErro("Senha deve possuir pelo menos 8 caracteres");
       return;
-    } else {
-      setErro(undefined);
     }
 
+    setErro(undefined);
     alert("Username e senha gravados");
   }
 
   return (
     <View style={styles.tudo}>
-      <View style={styles.CaixaLogin}>
-        <View style={styles.LogoTitulo}>
-          <Text style={styles.titulo}>CORE</Text>
-          <Image style={styles.icon} source={require("./assets/images/icone.png")} />
-        </View>
 
-        <View style={styles.container}>
-          <TextInput
-            placeholder="Digite um username"
-            placeholderTextColor="#ccc"
-            onChangeText={setUsername}
-            value={username}
-            style={styles.input}
-          />
-          <TextInput
-            placeholder="Digite sua senha"
-            placeholderTextColor="#ccc"
-            secureTextEntry
-            onChangeText={setPassword}
-            value={password}
-            style={styles.input}
-          />
-
-          {erro && <Text style={styles.error}>{erro}</Text>}
-
-          <Button title="Avançar" onPress={validar} color="#10B981" />
-        </View>
+      <View style={styles.LogoTitulo}>
+        <Image style={styles.icon} source={require("./assets/images/icone.png")} />
       </View>
+
+      <View style={styles.container}>
+        <Text style={styles.dica}>Nome de usuário</Text>
+        <TextInput
+          placeholder="Digite um nome de usuário"
+          placeholderTextColor="#ccc"
+          onChangeText={setUsername}
+          value={username}
+          style={styles.input}
+        />
+        <Text style={styles.dica}>Senha</Text>
+        <TextInput
+          placeholder="Digite sua senha"
+          placeholderTextColor="#ccc"
+          secureTextEntry
+          onChangeText={setPassword}
+          value={password}
+          style={styles.input}
+        />
+
+        {erro && <Text style={styles.error}>{erro}</Text>}
+
+      </View>
+      <Button title="Avançar" onPress={validar} color="#10B981" />
     </View>
   );
 }
@@ -77,7 +73,8 @@ const styles = StyleSheet.create({
   },
   container: {
     width: "100%",
-    alignItems: "center",
+    maxWidth: 360,
+    alignItems: "flex-start",
     justifyContent: "center",
   },
   LogoTitulo: {
@@ -98,8 +95,8 @@ const styles = StyleSheet.create({
   },
   input: {
     borderWidth: 1,
-    width: "100%",
-    marginVertical: 10,
+    width: "85%",
+    marginVertical: 15,
     padding: 10,
     borderRadius: 8,
     borderColor: "#fff",
@@ -109,12 +106,12 @@ const styles = StyleSheet.create({
   error: {
     color: "red",
     marginBottom: 10,
-    textAlign: "center",
+    width: "85%",
   },
-  CaixaLogin: {
-    backgroundColor: "#3c3f46",
-    borderRadius: 25,
-    padding: 20,
-    textColor: "#121315",
-  },
+  dica: {
+    color: "#fff",
+    fontWeight: 600,
+    width: "85%",
+    marginVertical: 5,
+  }
 });
