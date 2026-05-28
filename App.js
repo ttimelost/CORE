@@ -1,8 +1,9 @@
 import { useState } from "react";
-import { StyleSheet, Text, View, Image } from "react-native";
+import { StyleSheet, Text, View, Image, TextInput, Button } from "react-native";
 
 export default function App() {
   const [username, setUsername] = useState("");
+  const [password, setPassword] = useState("");
 
   const [erro, setErro] = useState(undefined);
   function validar() {
@@ -22,14 +23,21 @@ export default function App() {
       setErro(undefined);
     }
 
-    alert("Username Gravado");
+    if (password.length < 8) {
+      setErro("Senha deve possuir pelo menos 8 caracteres");
+      return;
+    } else {
+      setErro(undefined);
+    }
+
+    alert("Username e senha gravados");
   }
 
   return (
-    <View>
+    <View style={styles.tudo}>
       <View style={styles.LogoTitulo}>
-        <Texto>CORE</Texto>
-        <Image style={styles.icon} source={require("./assets/icone.png")} />
+        <Text style={styles.titulo}>CORE</Text>
+        <Image style={styles.icon} source={require("./assets/images/icone.png")} />
       </View>
 
       <View style={styles.container}>
@@ -37,15 +45,17 @@ export default function App() {
           placeholder="Digite seu username"
           onChangeText={setUsername}
           value={username}
-          style={{
-            borderWidth: 1,
-            width: 200,
-            marginVertical: 10,
-            padding: 5,
-          }}
+          style={styles.input}
+        />
+        <TextInput
+          placeholder="Digite sua senha"
+          secureTextEntry
+          onChangeText={setPassword}
+          value={password}
+          style={styles.input}
         />
 
-        {erro && <Text style={{ color: "red" }}>{erro}</Text>}
+        {erro && <Text style={styles.error}>{erro}</Text>}
 
         <Button title="Validar" onPress={validar} />
       </View>
@@ -54,10 +64,42 @@ export default function App() {
 }
 
 const styles = StyleSheet.create({
-  container: {
+  tudo: {
     flex: 1,
     backgroundColor: "#fff",
     alignItems: "center",
     justifyContent: "center",
+  },
+  container: {
+    width: 280,
+    alignItems: "center",
+    justifyContent: "center",
+  },
+  LogoTitulo: {
+    flexDirection: "row",
+    alignItems: "center",
+    justifyContent: "center",
+    marginBottom: 30,
+  },
+  icon: {
+    width: 40,
+    height: 40,
+    marginLeft: 10,
+  },
+  titulo: {
+    fontWeight: 'bold',
+    fontSize: 40,
+  },
+  input: {
+    borderWidth: 1,
+    width: 240,
+    marginVertical: 10,
+    padding: 10,
+    borderRadius: 8,
+  },
+  error: {
+    color: "red",
+    marginBottom: 10,
+    textAlign: "center",
   },
 });
