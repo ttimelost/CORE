@@ -35,29 +35,33 @@ export default function App() {
 
   return (
     <View style={styles.tudo}>
-      <View style={styles.LogoTitulo}>
-        <Text style={styles.titulo}>CORE</Text>
-        <Image style={styles.icon} source={require("./assets/images/icone.png")} />
-      </View>
+      <View style={styles.CaixaLogin}>
+        <View style={styles.LogoTitulo}>
+          <Text style={styles.titulo}>CORE</Text>
+          <Image style={styles.icon} source={require("./assets/images/icone.png")} />
+        </View>
 
-      <View style={styles.container}>
-        <TextInput
-          placeholder="Digite seu username"
-          onChangeText={setUsername}
-          value={username}
-          style={styles.input}
-        />
-        <TextInput
-          placeholder="Digite sua senha"
-          secureTextEntry
-          onChangeText={setPassword}
-          value={password}
-          style={styles.input}
-        />
+        <View style={styles.container}>
+          <TextInput
+            placeholder="Digite um username"
+            placeholderTextColor="#ccc"
+            onChangeText={setUsername}
+            value={username}
+            style={styles.input}
+          />
+          <TextInput
+            placeholder="Digite sua senha"
+            placeholderTextColor="#ccc"
+            secureTextEntry
+            onChangeText={setPassword}
+            value={password}
+            style={styles.input}
+          />
 
-        {erro && <Text style={styles.error}>{erro}</Text>}
+          {erro && <Text style={styles.error}>{erro}</Text>}
 
-        <Button title="Login" onPress={validar} />
+          <Button title="Avançar" onPress={validar} color="" />
+        </View>
       </View>
     </View>
   );
@@ -66,7 +70,7 @@ export default function App() {
 const styles = StyleSheet.create({
   tudo: {
     flex: 1,
-    backgroundColor: "#fff",
+    backgroundColor: "#f5f5f5",
     alignItems: "center",
     justifyContent: "center",
   },
@@ -89,6 +93,7 @@ const styles = StyleSheet.create({
   titulo: {
     fontWeight: 'bold',
     fontSize: 40,
+    color: '#fff',
   },
   input: {
     borderWidth: 1,
@@ -96,10 +101,19 @@ const styles = StyleSheet.create({
     marginVertical: 10,
     padding: 10,
     borderRadius: 8,
+    borderColor: "#fff",
+    backgroundColor: "#1f1f25",
+    color: '#fff',
   },
   error: {
     color: "red",
     marginBottom: 10,
     textAlign: "center",
+  },
+  CaixaLogin: {
+    backgroundColor: "#121315",
+    borderRadius: 25,
+    padding: 20,
+    textColor: "#fff",
   },
 });
