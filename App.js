@@ -1,3 +1,8 @@
+// TODO (@VitorCarvalhoOrt): Trocar botão por TouchableOpacity.
+// Contexto: O button do react-native não permite styles, direito, trocá-lo por TouchableOpacity é melhor.
+
+
+
 import { useState } from "react";
 import { StyleSheet, Text, View, Image, TextInput, Button } from "react-native";
 
@@ -54,7 +59,9 @@ export default function App() {
         {erro && <Text style={styles.error}>{erro}</Text>}
 
       </View>
-      <Button title="Avançar" onPress={validar} color="#10B981"/>
+      <View style={styles.buttonWrapper}>
+        <Button title="Avançar" onPress={validar} color="#10B981"/>
+      </View>
     </View>
   );
 }
@@ -113,5 +120,10 @@ const styles = StyleSheet.create({
     marginVertical: 5,
     alignSelf: "flex-start",
     marginLeft: "7.5%",
+  },
+  buttonWrapper: {
+    marginBottom: 40,
+    width: "100%",
+    alignItems: "center",
   },
 });
