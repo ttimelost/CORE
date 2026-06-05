@@ -1,8 +1,6 @@
 // TODO (@VitorCarvalhoOrt): Trocar botão por TouchableOpacity.
 // Contexto: O button do react-native não permite styles, direito, trocá-lo por TouchableOpacity é melhor.
 
-
-
 import { useState } from "react";
 import { StyleSheet, Text, View, Image, TextInput, Button } from "react-native";
 
@@ -15,28 +13,36 @@ export default function App() {
   function validar() {
     const apenasLetras = /^[a-zA-Z]+$/;
 
-    if (!apenasLetras.test(username)) {
-      setErro("Username deve possuir apenas letras");
-      return;
-    }
+    if (!apenasLetras.test(username))
+      return "Username deve possuir apenas letras";
 
-    if (username.length < 3) {
-      setErro("Username deve possuir pelo menos 3 letras");
-      return;
-    }
+    if (username.length < 3)
+      return "Username deve possuir pelo menos 3 letras";
 
-    if (password.length < 8) {
-      setErro("Senha deve possuir pelo menos 8 caracteres");
-      return;
-    }
+    if (password.length < 8)
+      return "Senha deve possuir pelo menos 8 caracteres";
+  }
 
-    setErro(undefined);
-    alert("Username e senha gravados");
+
+  // TODO (@VitorCarvalhoOrt): Adicionar salvamento pra um DB.
+  // Contexto:
+
+  function salvar() {
+    const mensagemErro = validar();
+
+    setErro(mensagemErro);
+
+    if (!mensagemErro) {
+      alert("Username e senha gravados");
+    }
   }
 
   return (
     <View style={styles.tudo}>
-      <Image style={styles.icon} source={require("./assets/images/icone.png")} />
+      <Image
+        style={styles.icon}
+        source={require("./assets/images/icone.png")}
+      />
       <View style={styles.container}>
         <Text style={styles.dica}>Nome de usuário</Text>
         <TextInput
@@ -57,10 +63,9 @@ export default function App() {
         />
 
         {erro && <Text style={styles.error}>{erro}</Text>}
-
       </View>
       <View style={styles.buttonWrapper}>
-        <Button title="Avançar" onPress={validar} color="#10B981"/>
+        <Button title="Avançar" onPress={salvar} color="#10B981" />
       </View>
     </View>
   );
@@ -92,9 +97,9 @@ const styles = StyleSheet.create({
     marginBottom: 30,
   },
   titulo: {
-    fontWeight: 'bold',
+    fontWeight: "bold",
     fontSize: 40,
-    color: '#fff',
+    color: "#fff",
   },
   input: {
     borderWidth: 1,
@@ -104,7 +109,7 @@ const styles = StyleSheet.create({
     borderRadius: 8,
     borderColor: "#fff",
     backgroundColor: "#1f1f25",
-    color: '#fff',
+    color: "#fff",
   },
   error: {
     color: "red",
