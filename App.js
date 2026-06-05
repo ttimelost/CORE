@@ -1,6 +1,3 @@
-// TODO (@VitorCarvalhoOrt): Trocar botão por TouchableOpacity.
-// Contexto: O button do react-native não permite styles, direito, trocá-lo por TouchableOpacity é melhor.
-
 import { useState } from "react";
 import { StyleSheet, Text, View, Image, TextInput, Button } from "react-native";
 
@@ -24,7 +21,7 @@ export default function App() {
   }
 
 
-  // TODO (@VitorCarvalhoOrt): Adicionar salvamento da senhation.
+  // TODO: Adicionar salvamento da senhation.
 
   function salvar() {
     const mensagemErro = validar();
@@ -64,7 +61,7 @@ export default function App() {
         {erro && <Text style={styles.error}>{erro}</Text>}
       </View>
       <View style={styles.buttonWrapper}>
-        <Button title="Avançar" onPress={salvar} color="#10B981" />
+        <Button title="Avançar" onPress={salvar} color="#10B981" /> {/* TODO: TouchableOpacity e adicionar navegação */}
       </View>
     </View>
   );
