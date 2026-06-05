@@ -24,8 +24,7 @@ export default function App() {
   }
 
 
-  // TODO (@VitorCarvalhoOrt): Adicionar salvamento pra um DB.
-  // Contexto:
+  // TODO (@VitorCarvalhoOrt): Adicionar salvamento da senhation.
 
   function salvar() {
     const mensagemErro = validar();
