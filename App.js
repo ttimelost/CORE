@@ -1,35 +1,24 @@
+// TO-DO: fazer 
+
 import { useState } from "react";
 import { StyleSheet, Text, View, Image, TextInput, Button } from "react-native";
 
 export default function App() {
-  const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
-
   const [erro, setErro] = useState(undefined);
 
   function validar() {
-    const apenasLetras = /^[a-zA-Z]+$/;
-
-    if (!apenasLetras.test(username))
-      return "Username deve possuir apenas letras";
-
-    if (username.length < 3)
-      return "Username deve possuir pelo menos 3 letras";
-
     if (password.length < 8)
       return "Senha deve possuir pelo menos 8 caracteres";
   }
 
-
-  // TODO: Adicionar salvamento da senhation.
-
-  function salvar() {
+  function salvar() { // TO-DO: salvamento real para um banco de dados
     const mensagemErro = validar();
 
     setErro(mensagemErro);
 
     if (!mensagemErro) {
-      alert("Username e senha gravados");
+      alert("Senha gravada");
     }
   }
 
@@ -40,14 +29,6 @@ export default function App() {
         source={require("./assets/images/icone.png")}
       />
       <View style={styles.container}>
-        <Text style={styles.dica}>Nome de usuário</Text>
-        <TextInput
-          placeholder="Digite um nome de usuário"
-          placeholderTextColor="#ccc"
-          onChangeText={setUsername}
-          value={username}
-          style={styles.input}
-        />
         <Text style={styles.dica}>Senha</Text>
         <TextInput
           placeholder="Digite sua senha"
@@ -61,7 +42,7 @@ export default function App() {
         {erro && <Text style={styles.error}>{erro}</Text>}
       </View>
       <View style={styles.buttonWrapper}>
-        <Button title="Avançar" onPress={salvar} color="#10B981" /> {/* TODO: TouchableOpacity e adicionar navegação */}
+        <Button title="Avançar" onPress={salvar} color="#10B981" /> {/* TO-DO: TouchableOpacity e adicionar navegação */}
       </View>
     </View>
   );
