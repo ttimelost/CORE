@@ -1,17 +1,31 @@
-import { StyleSheet, Text, View } from 'react-native';
+import React, { useState, useEffect } from 'react';
+import { View, Text, ActivityIndicator, StyleSheet } from 'react-native';
 
 export default function App() {
-  return (
-    <View style={styles.container}>
-      <Text style={styles.titulo}>
-        HEH - Bem-vindo ao projeto final, eu acho
-      </Text>
+  const [isLoading, setIsLoading] = useState(true);
 
-      <Text style={styles.subtitulo}>
-      CORE
-      </Text>
+  useEffect(() => {
+    // Simula uma busca de dados ou processo de 3 segundos
+    setTimeout(() => {
+      setIsLoading(false);
+    }, 4000);
+  }, []);
+
+  if (isLoading) {
+    return (
+      <View style={styles.container}>
+        <ActivityIndicator style={styles.bola} size="large" color="rgb(83, 83, 83)" />
+        <Text style={styles.titulo}>CORE</Text>
+      </View>
+    );
+  }
+
+  return(
+    <View style={styles.container}>
+      <Text style={styles.titulo}>Bu</Text>
     </View>
-  );
+  )
+
 }
 
 const styles = StyleSheet.create({
@@ -26,20 +40,11 @@ const styles = StyleSheet.create({
   titulo: {
     fontSize: 36,
     fontWeight: 'bold',
-    color: '#00f7ff',
-    textShadowColor: '#00f7ff',
-    textShadowOffset: {
-      width: 0,
-      height: 0,
-    },
+    color: '#cecece',
     textShadowRadius: 20,
     marginBottom: 15,
   },
-
-  subtitulo: {
-    fontSize: 18,
-    color: '#ffffff',
-    textAlign: 'center',
-    opacity: 0.85,
-  },
+  bola: {
+    padding: 20,
+  }
 });
