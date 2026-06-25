@@ -1,13 +1,14 @@
 import { useState } from "react";
 import { StyleSheet, Text, View, Image, TextInput, Button } from "react-native";
 
-export default function App() {
+export default function Registro({ navigation }) {
   const [password, setPassword] = useState("");
   const [erro, setErro] = useState(undefined);
+  const [isLoading, setIsLoading] = useState(true);
 
   function validar() {
     if (password.length < 8)
-      return "Senha deve possuir pelo menos 8 caracteres";
+      return "Erro: Senha muito pequena";
   }
 
   function salvar() {
@@ -16,16 +17,13 @@ export default function App() {
     setErro(mensagemErro);
 
     if (!mensagemErro) {
-      alert("Senha gravada");
+      alert("Olá mundo!")
+      navigation.navigate("Inicial")
     }
   }
 
   return (
     <View style={styles.tudo}>
-      <Image
-        style={styles.icon}
-        source={require("./assets/images/icone.png")}
-      />
       <View style={styles.container}>
         <Text style={styles.dica}>Senha</Text>
         <TextInput
@@ -61,15 +59,6 @@ const styles = StyleSheet.create({
     alignItems: "center",
     justifyContent: "center",
     flex: 1,
-  },
-
-  icon: {
-    width: 60,
-    height: 60,
-    marginLeft: 10,
-    flexDirection: "column",
-    alignItems: "center",
-    marginBottom: 30,
   },
   titulo: {
     fontWeight: "bold",

@@ -1,14 +1,17 @@
 import React, { useState, useEffect } from 'react';
 import { View, Text, ActivityIndicator, StyleSheet } from 'react-native';
+import NavegacaoStack from "./src/navegacao/NavegacaoStack"
+import { NavigationContainer } from '@react-navigation/native';
+
+const NavegadorAtual = NavegacaoStack
 
 export default function App() {
   const [isLoading, setIsLoading] = useState(true);
 
   useEffect(() => {
-    // Simula uma busca de dados ou processo de 3 segundos
     setTimeout(() => {
       setIsLoading(false);
-    }, 4000);
+    }, 1000);
   }, []);
 
   if (isLoading) {
@@ -21,9 +24,9 @@ export default function App() {
   }
 
   return(
-    <View style={styles.container}>
-      <Text style={styles.titulo}>Bu</Text>
-    </View>
+    <NavigationContainer>
+      <NavegadorAtual />
+    </NavigationContainer>
   )
 
 }
