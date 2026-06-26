@@ -1,13 +1,11 @@
 import React from 'react';
 import { View, Text, StyleSheet } from 'react-native';
 
-export default function TelaInicial({ navigation }) {
+export default function TelaEducacao({ navigation }) {
   return (
     <View style={styles.container}>
       <View style={styles.card}>
-        <Text style={styles.titulo}>Tela Inicial</Text>
-        <Text style={styles.texto}>Lorem ipsum dolor sit amet</Text>
-        <Text style={styles.texto}>Colas</Text>
+        <Text style={styles.titulo}>Tela educacao</Text>
       </View>
     </View>
   );

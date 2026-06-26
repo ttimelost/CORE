@@ -1,7 +1,7 @@
 import { useState } from "react";
 import { StyleSheet, Text, View, Image, TextInput, Button } from "react-native";
 
-export default function Registro({ navigation }) {
+export default function TelaRegistro({ navigation }) {
   const [password, setPassword] = useState("");
   const [erro, setErro] = useState(undefined);
   const [isLoading, setIsLoading] = useState(true);
@@ -18,7 +18,7 @@ export default function Registro({ navigation }) {
 
     if (!mensagemErro) {
       alert("Olá mundo!")
-      navigation.navigate("Inicial")
+      navigation.navigate("Principal")
     }
   }
 
@@ -49,49 +49,53 @@ const styles = StyleSheet.create({
     flex: 1,
     backgroundColor: "#121315",
     alignItems: "center",
-    justifyContent: "flex-start",
-    paddingHorizontal: 16,
-    paddingTop: 40,
+    justifyContent: "center",
+    paddingHorizontal: 20,
+    paddingVertical: 24,
   },
   container: {
     width: "100%",
     maxWidth: 360,
-    alignItems: "center",
+    alignItems: "stretch",
     justifyContent: "center",
-    flex: 1,
+    backgroundColor: "#1b1c21",
+    borderRadius: 16,
+    borderWidth: 1,
+    borderColor: "#2d2f36",
+    paddingHorizontal: 20,
+    paddingVertical: 24,
   },
   titulo: {
     fontWeight: "bold",
     fontSize: 40,
     color: "#fff",
+    marginBottom: 12,
   },
   input: {
     borderWidth: 1,
-    width: "85%",
-    marginVertical: 15,
-    padding: 10,
-    borderRadius: 8,
-    borderColor: "#fff",
-    backgroundColor: "#1f1f25",
+    width: "100%",
+    marginTop: 8,
+    marginBottom: 12,
+    padding: 12,
+    borderRadius: 10,
+    borderColor: "#3f424b",
+    backgroundColor: "#25262d",
     color: "#fff",
   },
   error: {
-    color: "red",
-    marginBottom: 10,
-    width: "85%",
-    alignSelf: "flex-start",
-    marginLeft: "7.5%",
+    color: "#ff6b6b",
+    marginBottom: 8,
+    width: "100%",
+    alignSelf: "stretch",
   },
   dica: {
     color: "#fff",
-    fontWeight: 600,
-    width: "85%",
-    marginVertical: 5,
-    alignSelf: "flex-start",
-    marginLeft: "7.5%",
+    fontWeight: "600",
+    width: "100%",
+    marginBottom: 4,
   },
   buttonWrapper: {
-    marginBottom: 40,
+    marginTop: 20,
     width: "100%",
     alignItems: "center",
   },
