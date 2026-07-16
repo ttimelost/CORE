@@ -16,6 +16,7 @@ export default function NavegacaoStack() {
       <Stack.Screen
         name="Principal"
         component={NavegacaoBottom}
+        options={{ gestureEnabled: false }}
       />
     </Stack.Navigator>
   );
