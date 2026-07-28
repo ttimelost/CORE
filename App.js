@@ -2,8 +2,17 @@ import React, { useState, useEffect } from 'react';
 import { View, Text, ActivityIndicator, StyleSheet } from 'react-native';
 import NavegacaoStack from "./src/navegacao/NavegacaoStack"
 import { NavigationContainer } from '@react-navigation/native';
+import { useContext } from 'react'
+import { AuthContext, AuthProvider } from './contexts/Authcontext';
 
 const NavegadorAtual = NavegacaoStack
+const usuario = useContext(AuthContext)
+
+function Rotas() {
+  const usuario = useContext(AuthContext)
+
+  //TODO -- 
+}
 
 export default function App() {
   const [isLoading, setIsLoading] = useState(true);

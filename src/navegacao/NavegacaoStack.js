@@ -10,7 +10,7 @@ export default function NavegacaoStack() {
   return (
     <Stack.Navigator screenOptions={{ headerShown: false }}>
       <Stack.Screen
-        name="RegistrSo"
+        name="Registro"
         component={TelaRegistro}
       />
       <Stack.Screen

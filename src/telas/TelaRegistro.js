@@ -1,7 +1,27 @@
 import { useState } from "react";
 import { StyleSheet, Text, View, Image, TextInput, Button } from "react-native";
+import { AuthContext } from "../../contexts/Authcontext";
+import { useContext, useState } from "react";
 
 export default function TelaRegistro({ navigation }) {
+  const {log} = useContext(AuthContext)
+
+  function logar() {
+    log()
+  }
+  const [usuario, setUsuario] = useSTate('')
+  const [senha, setSenha] = useState('')
+
+  return(
+    <View style={styles.container}>
+      <TextInput placeholder="Usuario" value={usuario} onChangeText={setUsuario}/>
+      <TextInput placeholder="Senha" value={senha} onChange={setSenha}/>
+      <Button title="Logar" onPress={logar}/>
+    </View>
+  )
+}
+/*
+
   const [password, setPassword] = useState("");
   const [erro, setErro] = useState(undefined);
   const [isLoading, setIsLoading] = useState(true);
@@ -22,6 +42,8 @@ export default function TelaRegistro({ navigation }) {
     }
   }
 
+
+
   return (
     <View style={styles.tudo}>
       <View style={styles.container}>
@@ -38,11 +60,13 @@ export default function TelaRegistro({ navigation }) {
         {erro && <Text style={styles.error}>{erro}</Text>}
       </View>
       <View style={styles.buttonWrapper}>
-        <Button title="Avançar" onPress={salvar} color="#10B981" /> {/* TO-DO: TouchableOpacity e adicionar navegação */}
+        <Button title="Avançar" onPress={salvar} color="#10B981" /> #{ TO-DO: TouchableOpacity e adicionar navegação }
       </View>
     </View>
   );
 }
+
+*/
 
 const styles = StyleSheet.create({
   tudo: {
