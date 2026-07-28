@@ -5,7 +5,7 @@ export default function TelaInicial({ navigation }) {
   return (
     <View style={styles.container}>
       <View style={styles.card}>
-        <Text style={styles.titulo}>Tela Inicial</Text>
+        <Text style={styles.titulo}>Component</Text>
         <Text style={styles.texto}>Lorem ipsum dolor sit amet</Text>
       </View>
     </View>

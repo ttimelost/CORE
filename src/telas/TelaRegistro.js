@@ -17,7 +17,7 @@ export default function TelaRegistro({ navigation }) {
     setErro(mensagemErro);
 
     if (!mensagemErro) {
-      alert("Olá mundo!")
+      alert("Senha registrada!")
       navigation.navigate("Principal")
     }
   }
