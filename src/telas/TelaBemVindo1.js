@@ -1,5 +1,6 @@
 import {View, Text, ImageBackground, TouchableOpacity, StyleSheet} from "react-native";
 import Svg, { Path } from "react-native-svg";
+import TelaRegistro from "./TelaRegistro";
 
 export default function TelaBemVindo1({ navigation }) {
     return (
@@ -28,7 +29,7 @@ export default function TelaBemVindo1({ navigation }) {
                     <Text style={styles.descricao}> Lorem ipsum dolor sit amet Lorem ipsum dolor sit amet Lorem ipsum dolor sit amet Lorem ipsum dolor sit amet</Text>
                 </View>
 
-                <TouchableOpacity style={styles.botao}>
+                <TouchableOpacity style={styles.botao} onPress={() => navigation.navigate('Registro')}>
                     <Text style={styles.botaoTexto}> Avançar → </Text>
                 </TouchableOpacity>
             </View>
