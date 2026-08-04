@@ -2,11 +2,12 @@ import React from "react";
 import { View, Text, StyleSheet } from "react-native";
 
 import ComponenteCategoria from "../componentes/componenteCategoria";
+import ComponenteSuperCategoria from "../componentes/componenteSuperCategoria";
 
 export default function TelaCategorias({ navigation }) {
   return (
     <View style={styles.container}>
-      <Text style={styles.titulo}>Necessidades</Text>
+      <ComponenteSuperCategoria rotulo='Necdessicades'/>
       <View style={styles.superCategoria}>
         <View style={styles.cards}>
           <ComponenteCategoria
@@ -54,10 +55,4 @@ const styles = StyleSheet.create({
     color: "#fff",
     marginBottom: 16,
   },
-  superCategoria: {
-    borderRadius: 15,
-    borderWidth: 1,
-    borderColor: '#030303',
-    backgroundColor: '#030303'
-  }
 });
