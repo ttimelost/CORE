@@ -1,45 +1,52 @@
-import React from 'react';
-import { View, Text, StyleSheet } from 'react-native';
+import React from "react";
+import { View, Text, StyleSheet } from "react-native";
 
-export default function TelaInicial({ navigation }) {
+export default function ComponenteCategoria({
+  rotulo,
+  target,
+  targetType,
+  atribuido,
+  gasto,
+}) {
   return (
-    <View style={styles.container}>
-      <View style={styles.card}>
-        <Text style={styles.titulo}>Component</Text>
-        <Text style={styles.texto}>Lorem ipsum dolor sit amet</Text>
-      </View>
+    <View style={styles.cardContainer}>
+
+        <Text style={styles.cardTitle}>{rotulo}</Text>
+        <Text style={styles.cardBody}>Atribuído: {atribuido}</Text>
+        <Text style={styles.progressBar}>
+          finge que tem uma progress bar bonitinha aqui
+        </Text>
+        <View style={{ flexDirection: "row", justifyContent: "space-between" }}>
+          <Text style={styles.cardBody}>Faltando: {target - atribuido}</Text>
+          <Text style={styles.cardBody}>Alvo: {target}</Text>
+        </View>
+
     </View>
   );
 }
-
 const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    backgroundColor: "#121315",
-    alignItems: "center",
-    justifyContent: "center",
-    paddingHorizontal: 20,
-    paddingVertical: 24,
+  cardContainer: {
+    backgroundColor: "#fff",
+    padding: 16,
+    borderRadius: 8,
+    marginVertical: 8,
+    shadowColor: "#000",
+    shadowOpacity: 0.1,
+    shadowRadius: 4,
+    elevation: 3,
   },
-  card: {
-    width: "100%",
-    maxWidth: 360,
-    backgroundColor: "#1b1c21",
-    borderRadius: 16,
-    borderWidth: 1,
-    borderColor: "#2d2f36",
-    paddingHorizontal: 20,
-    paddingVertical: 24,
-  },
-  texto: {
-    fontSize: 16,
-    color: "#d0d4dd",
-    marginBottom: 8,
-  },
-  titulo: {
+  cardTitle: {
+    fontSize: 18,
     fontWeight: "bold",
-    fontSize: 32,
-    color: "#fff",
-    marginBottom: 16,
+    marginBottom: 4,
   },
+  cardBody: {
+    fontSize: 14,
+    color: "#666",
+  },
+  progressBar: {
+    fontWeight: "bold",
+    fontStyle: "italic",
+  },
+
 });

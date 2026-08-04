@@ -1,12 +1,28 @@
-import React from 'react';
-import { View, Text, StyleSheet } from 'react-native';
+import React from "react";
+import { View, Text, StyleSheet } from "react-native";
+
+import ComponenteCategoria from "../componentes/ComponenteCategoria";
 
 export default function TelaInicial({ navigation }) {
   return (
     <View style={styles.container}>
-      <View style={styles.card}>
-        <Text style={styles.titulo}>Tela Inicial</Text>
-        <Text style={styles.texto}>Lorem ipsum dolor sit amet</Text>
+      <View style={styles.superCategoria}>
+      <Text>Necessidades</Text>
+        <View style={styles.cards}>
+          <ComponenteCategoria
+            rotulo="🛒Mercado"
+            target="200.0"
+            atribuido="100.0"
+            gasto="12"
+          />
+
+          <ComponenteCategoria
+            rotulo="⛽Gasolina"
+            target="2000.0"
+            atribuido="9.0"
+            gasto="2000.0"
+          />
+        </View>
       </View>
     </View>
   );
@@ -21,13 +37,9 @@ const styles = StyleSheet.create({
     paddingHorizontal: 20,
     paddingVertical: 24,
   },
-  card: {
+  cards: {
     width: "100%",
-    maxWidth: 360,
-    backgroundColor: "#1b1c21",
-    borderRadius: 16,
-    borderWidth: 1,
-    borderColor: "#2d2f36",
+    maxWidth: 600,
     paddingHorizontal: 20,
     paddingVertical: 24,
   },
@@ -42,4 +54,7 @@ const styles = StyleSheet.create({
     color: "#fff",
     marginBottom: 16,
   },
+  superCategoria: {
+
+  }
 });
