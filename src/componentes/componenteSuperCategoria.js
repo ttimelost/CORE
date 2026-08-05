@@ -2,20 +2,20 @@ import React from "react";
 import { View, Text, StyleSheet } from "react-native";
 
 export default function ComponenteSuperCategoria({
-  rotulo,
+  rotulo
 }) {
     return(
       <View>
-        <Text style={styles.supercategoria}>{rotulo}</Text>
+        <Text style={styles.titulo}>{rotulo}</Text>
       </View>
     )
 }
 
 const styles = StyleSheet.create({
-  supercategoria: {
-    borderRadius: 15,
-    borderWidth: 1,
-    borderColor: '#030303',
-    backgroundColor: '#030303'
+  titulo: {
+    fontSize: 36,
+    fontWeight: 'bold',
+    color: 'white',
+    padding: 15
   }
 })

@@ -1,6 +1,19 @@
 import React from "react";
 import { View, Text, StyleSheet } from "react-native";
 
+
+function calcular_faltando_e_mensagem_merenomeie(alvo, assigned) {
+  if (alvo == assigned) {
+    return ('Prontiu')
+  }
+  else if (assigned > alvo) {
+    return "Sobrando " + (assigned - alvo);
+  }
+  else {
+    return "Faltam " + (alvo - assigned)
+  }
+}
+
 export default function ComponenteCategoria({
   rotulo,
   target,
@@ -11,15 +24,15 @@ export default function ComponenteCategoria({
   return (
     <View style={styles.cardContainer}>
 
-        <Text style={styles.cardTitle}>{rotulo}</Text>
-        <Text style={styles.cardBody}>Atribuído: {atribuido}</Text>
-        <Text style={styles.progressBar}>
-          finge que tem uma progress bar bonitinha aqui
-        </Text>
-        <View style={{ flexDirection: "row", justifyContent: "space-between" }}>
-          <Text style={styles.cardBody}>Faltando: {target - atribuido}</Text>
-          <Text style={styles.cardBody}>Alvo: {target}</Text>
-        </View>
+      <Text style={styles.cardTitle}>{rotulo}</Text>
+      <Text style={styles.cardBody}>Atribuído: {atribuido}</Text>
+      <Text style={styles.progressBar}>
+        finge que tem uma progress bar bonitinha aqui
+      </Text>
+      <View style={{ flexDirection: "row", justifyContent: "space-between" }}>
+        <Text style={styles.cardBody}>{calcular_faltando_e_mensagem_merenomeie(target, atribuido)}</Text>
+        <Text style={styles.cardBody}>Alvo: {target}</Text>
+      </View>
 
     </View>
   );
