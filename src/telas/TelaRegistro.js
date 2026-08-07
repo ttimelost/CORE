@@ -38,7 +38,8 @@ export default function TelaRegistro({ navigation }) {
         {erro && <Text style={styles.error}>{erro}</Text>}
       </View>
       <View style={styles.buttonWrapper}>
-        <Button title="Avançar" onPress={salvar} color="#10B981" /> {/* TO-DO: TouchableOpacity e adicionar navegação */}
+        <Button title="Avançar" onPress={salvar} color="#10B981" />
+        {/* TO-DO: TouchableOpacity e adicionar navegação */}
       </View>
     </View>
   );

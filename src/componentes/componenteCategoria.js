@@ -2,41 +2,59 @@ import React from "react";
 import { View, Text, StyleSheet } from "react-native";
 
 
-function calcular_faltando_e_mensagem_merenomeie(alvo, assigned) {
-  if (alvo == assigned) {
-    return ('Prontiu')
+const formatarMoeda = new Intl.NumberFormat("pt-BR", {
+  style: "currency",
+  currency: "BRL",
+});
+
+function formatMoney(value) {
+  return formatarMoeda.format(value ?? 0);
+}
+
+function calcularStatusMeta(alvo, atribuido) {
+  if (alvo === atribuido) {
+    return "Pronto";
   }
-  else if (assigned > alvo) {
-    return "Sobrando " + (assigned - alvo);
+
+  if (atribuido > alvo) {
+    return `Sobrando ${formatMoney(atribuido - alvo)}`;
   }
-  else {
-    return "Faltam " + (alvo - assigned)
-  }
+
+  return `Faltam ${formatMoney(alvo - atribuido)}`;
 }
 
 export default function ComponenteCategoria({
   rotulo,
   target,
-  targetType,
   atribuido,
-  gasto,
+  gasto
 }) {
   return (
     <View style={styles.cardContainer}>
-
       <Text style={styles.cardTitle}>{rotulo}</Text>
-      <Text style={styles.cardBody}>Atribuído: {atribuido}</Text>
+      <Text style={styles.cardBody}>
+        Atribuído: {formatMoney(atribuido)}
+      </Text>
+
       <Text style={styles.progressBar}>
         finge que tem uma progress bar bonitinha aqui
       </Text>
-      <View style={{ flexDirection: "row", justifyContent: "space-between" }}>
-        <Text style={styles.cardBody}>{calcular_faltando_e_mensagem_merenomeie(target, atribuido)}</Text>
-        <Text style={styles.cardBody}>Alvo: {target}</Text>
-      </View>
 
+      <View style={{ flexDirection: "row", justifyContent: "space-between" }}>
+        <Text style={styles.cardBody}>
+          {calcularStatusMeta(target, atribuido)}
+        </Text>
+        <Text style={styles.cardBody}>
+          Gasto: {formatMoney(gasto)}
+        </Text>
+        <Text style={styles.cardBody}>
+          Alvo: {formatMoney(target)}
+        </Text>
+      </View>
     </View>
   );
 }
+
 const styles = StyleSheet.create({
   cardContainer: {
     backgroundColor: "#fff",
@@ -52,16 +70,18 @@ const styles = StyleSheet.create({
     fontSize: 18,
     fontWeight: "bold",
     marginBottom: 4,
-    color: "#fff",
+    color: "#222",
   },
+
   cardBody: {
     fontSize: 14,
-    color: "#d0d4dd",
+    color: "#555",
   },
+
   progressBar: {
     fontWeight: "bold",
     fontStyle: "italic",
-    color: "#ffffff",
+    color: "#333",
     marginVertical: 8,
   },
 
