@@ -1,6 +1,6 @@
 import React from "react";
 import { View, Text, StyleSheet } from "react-native";
-
+import BarraProgresso from "./BarraProgresso";
 
 const formatarMoeda = new Intl.NumberFormat("pt-BR", {
   style: "currency",
@@ -36,9 +36,7 @@ export default function ComponenteCategoria({
         Atribuído: {formatMoney(atribuido)}
       </Text>
 
-      <Text style={styles.progressBar}>
-        finge que tem uma progress bar bonitinha aqui
-      </Text>
+      <BarraProgresso target={target} atribuido={atribuido} gasto={gasto} />
 
       <View style={{ flexDirection: "row", justifyContent: "space-between" }}>
         <Text style={styles.cardBody}>
@@ -76,13 +74,6 @@ const styles = StyleSheet.create({
   cardBody: {
     fontSize: 14,
     color: "#555",
-  },
-
-  progressBar: {
-    fontWeight: "bold",
-    fontStyle: "italic",
-    color: "#333",
-    marginVertical: 8,
   },
 
 });
