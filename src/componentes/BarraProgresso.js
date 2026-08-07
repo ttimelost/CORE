@@ -21,7 +21,8 @@ export default function BarraProgresso({
             ? "#86EFAC"
             : "#FCD34D";
     }
-
+// basicamente ele usa o progAtribuido e o progGasto para dar scale em views coloridas
+// a cor dessas views depende de se o usuario ta fazendo merda ou nao
   return (
     <View style={styles.container}>
 
