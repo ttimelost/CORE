@@ -52,14 +52,17 @@ const styles = StyleSheet.create({
     fontSize: 18,
     fontWeight: "bold",
     marginBottom: 4,
+    color: "#fff",
   },
   cardBody: {
     fontSize: 14,
-    color: "#666",
+    color: "#d0d4dd",
   },
   progressBar: {
     fontWeight: "bold",
     fontStyle: "italic",
+    color: "#ffffff",
+    marginVertical: 8,
   },
 
 });
