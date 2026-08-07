@@ -9,12 +9,12 @@ const novo_data = [
     data: [
       {
         rotulo: "🛒 Mercado",
-        target: 200,
+        alvo: 200,
         atribuido: 100,
         gasto: 12,
       },
       {
-        rotulo: "⛽ Gasolina", target: 2000, atribuido: 9, gasto: 2000,
+        rotulo: "⛽ Gasolina", alvo: 2000, atribuido: 9, gasto: 2000,
       },
     ],
   },
@@ -22,10 +22,10 @@ const novo_data = [
     titulo: "Wants",
     data: [
       {
-        rotulo: "Explorações intergaláticas", target: 2000000, atribuido: 9, gasto: 2000,
+        rotulo: "Explorações intergaláticas", alvo: 2000000, atribuido: 9, gasto: 2000,
       },
       {
-        rotulo: "Papelaria", target: 100, atribuido: 100, gasto: 0,
+        rotulo: "Papelaria", alvo: 100, atribuido: 100, gasto: 0,
       },
     ],
   },
@@ -45,8 +45,8 @@ export default function TelaCategorias({ navigation }) {
         renderItem={({ item }) => (
           <ComponenteCategoria
             rotulo={item.rotulo}
-            target={item.target}
-            targetType={item.targetType}
+            alvo={item.alvo}
+            alvoType={item.tipoAlvo}
             atribuido={item.atribuido}
             gasto={item.gasto}
           />
