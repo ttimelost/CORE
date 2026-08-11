@@ -23,8 +23,8 @@ export default function TelaRegistro({ navigation }) {
   }
 
   return (
-    <View style={styles.tudo}>
-      <View style={styles.container}>
+    <View style={styles.container}>
+      <View style={styles.tudo}>
         <Text style={styles.dica}>Senha</Text>
         <TextInput
           placeholder="Digite sua senha"
@@ -46,7 +46,7 @@ export default function TelaRegistro({ navigation }) {
 }
 
 const styles = StyleSheet.create({
-  tudo: {
+  container: {
     flex: 1,
     backgroundColor: "#121315",
     alignItems: "center",
@@ -54,7 +54,7 @@ const styles = StyleSheet.create({
     paddingHorizontal: 20,
     paddingVertical: 24,
   },
-  container: {
+  tudo: {
     width: "100%",
     maxWidth: 360,
     alignItems: "stretch",

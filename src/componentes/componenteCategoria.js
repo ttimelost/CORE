@@ -43,9 +43,6 @@ export default function ComponenteCategoria({
           {calcularStatusMeta(alvo, atribuido)}
         </Text>
         <Text style={styles.cardBody}>
-          Gasto: {formatMoney(gasto)}
-        </Text>
-        <Text style={styles.cardBody}>
           Alvo: {formatMoney(alvo)}
         </Text>
       </View>

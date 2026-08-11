@@ -14,7 +14,10 @@ const novo_data = [
         gasto: 12,
       },
       {
-        rotulo: "⛽ Gasolina", alvo: 2000, atribuido: 9, gasto: 2000,
+        rotulo: "⛽ Gasolina",
+        alvo: 2000,
+        atribuido: 9,
+        gasto: 2000,
       },
     ],
   },
@@ -22,10 +25,16 @@ const novo_data = [
     titulo: "Wants",
     data: [
       {
-        rotulo: "Explorações intergaláticas", alvo: 2000000, atribuido: 9, gasto: 2000,
+        rotulo: "Explorações intergaláticas",
+        alvo: 2000000,
+        atribuido: 9,
+        gasto: 2000,
       },
       {
-        rotulo: "Papelaria", alvo: 100, atribuido: 100, gasto: 0,
+        rotulo: "Papelaria",
+        alvo: 100,
+        atribuido: 100,
+        gasto: 0,
       },
     ],
   },
@@ -35,6 +44,7 @@ export default function TelaCategorias({ navigation }) {
   return (
     <View style={styles.container}>
       <SectionList
+        showsVerticalScrollIndicator={false}
         sections={novo_data}
         keyExtractor={(item) => item.rotulo}
         style={styles.list}
@@ -60,9 +70,11 @@ const styles = StyleSheet.create({
   container: {
     flex: 1,
     backgroundColor: "#121315",
+    alignItems: "center",
+    justifyContent: "center",
   },
   list: {
-    width: "100%",
+    width: "90%",
   },
   contentList: {
     paddingBottom: 24,
