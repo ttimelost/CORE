@@ -2,6 +2,7 @@ import { View, StyleSheet, SectionList } from "react-native";
 
 import ComponenteCategoria from "../componentes/componenteCategoria";
 import ComponenteSuperCategoria from "../componentes/componenteSuperCategoria";
+import { Button } from "react-native-web";
 
 const novo_data = [
   {
@@ -38,6 +39,10 @@ const novo_data = [
       },
     ],
   },
+  {
+    titulo: 'teste',
+    data: []
+  }
 ];
 
 export default function TelaCategorias({ navigation }) {
