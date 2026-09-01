@@ -22,8 +22,27 @@ export default function TelaAddCategoria({ navigation }) {
 
   return (
     <View style={styles.container}>
+
+      
       <Text style={styles.titulo}>Adicionar categoria</Text>
       <Button title="Salvar categoria" onPress={handleAdicionar} />
     </View>
   );
 }
+
+const styles = StyleSheet.create({
+  container: {
+    flex: 1,
+    backgroundColor: "#121315",
+    alignItems: "center",
+    justifyContent: "center",
+    padding: 20,
+  },
+
+  titulo: {
+    color: "#fff",
+    fontSize: 24,
+    fontWeight: "600",
+    marginBottom: 20,
+  },
+});

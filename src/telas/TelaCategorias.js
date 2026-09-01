@@ -23,7 +23,7 @@ export default function TelaCategorias({ navigation }) {
         style={styles.list}
         contentContainerStyle={styles.contentList}
         renderSectionHeader={({ section }) => (
-          <ComponenteSuperCategoria rotulo={section.titulo} />
+          <ComponenteSuperCategoria rotulo={section.titulo} navigation={navigation} />
         )}
         renderItem={({ item }) => (
           <ComponenteCategoria
