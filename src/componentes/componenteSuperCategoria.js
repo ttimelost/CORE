@@ -1,11 +1,15 @@
 import React from "react";
 import { View, Text, StyleSheet, TouchableOpacity } from "react-native";
+import TelaAddCategoria from "../telas/TelaAddCategoria";
 
-export default function ComponenteSuperCategoria({ rotulo }) {
+export default function ComponenteSuperCategoria({ rotulo, navigation }) {
   return (
     <View>
       <Text style={styles.titulo}>{rotulo}</Text>
-      <TouchableOpacity style={styles.botao} onPress={() => navigation.navigate('AddCategoria', { titulo: 'rotulo' })}>
+      <TouchableOpacity
+        style={styles.botao}
+        onPress={() => navigation.navigate('AddCategoria')}
+      >
         <Text style={styles.textoBotao}>Joao</Text>
       </TouchableOpacity>
     </View>

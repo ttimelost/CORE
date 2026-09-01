@@ -7,7 +7,7 @@ export default function TelaRegistro({ navigation }) {
   const [isLoading, setIsLoading] = useState(true);
 
   function validar() {
-    if (password.length < 8)
+    if (password.length < 2)
       return "Erro: Senha muito pequena";
   }
 
