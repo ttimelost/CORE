@@ -2,6 +2,7 @@ import React, { useState, useEffect } from 'react';
 import { View, Text, ActivityIndicator, StyleSheet } from 'react-native';
 import NavegacaoStack from "./src/navegacao/NavegacaoStack"
 import { NavigationContainer } from '@react-navigation/native';
+import { CategoriasProvider } from './src/contexts/CategoriasContext';
 
 const NavegadorAtual = NavegacaoStack
 
@@ -25,7 +26,9 @@ export default function App() {
 
   return(
     <NavigationContainer>
-      <NavegadorAtual />
+      <CategoriasProvider>
+        <NavegacaoStack />
+      </CategoriasProvider>
     </NavigationContainer>
   )
 

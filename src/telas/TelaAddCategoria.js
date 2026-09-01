@@ -1,44 +1,29 @@
-import React from 'react';
-import { View, Text, StyleSheet } from 'react-native';
+import React from "react";
+import { View, Text, Button, StyleSheet } from "react-native";
+import { useCategorias } from "../contexts/CategoriasContext";
 
-export default function TelaAddCategoria({ navigation, rotulo }) {
+export default function TelaAddCategoria({ navigation }) {
+  const { adicionarCategoria } = useCategorias();
+
+  const handleAdicionar = () => {
+    const novaCategoria = {
+      id: String(Date.now()),
+      titulo: "Needs",
+      rotulo: "📚 Livros",
+      tipoAlvo: "",
+      alvo: 300,
+      atribuido: 20,
+      gasto: 10,
+    };
+
+    adicionarCategoria(novaCategoria);
+    navigation.goBack();
+  };
+
   return (
     <View style={styles.container}>
-      <View style={styles.card}>
-        <Text style={styles.titulo}>Tela add categotria</Text>
-      </View>
+      <Text style={styles.titulo}>Adicionar categoria</Text>
+      <Button title="Salvar categoria" onPress={handleAdicionar} />
     </View>
   );
 }
-
-const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    backgroundColor: "#121315",
-    alignItems: "center",
-    justifyContent: "center",
-    paddingHorizontal: 20,
-    paddingVertical: 24,
-  },
-  card: {
-    width: "100%",
-    maxWidth: 360,
-    backgroundColor: "#1b1c21",
-    borderRadius: 16,
-    borderWidth: 1,
-    borderColor: "#2d2f36",
-    paddingHorizontal: 20,
-    paddingVertical: 24,
-  },
-  texto: {
-    fontSize: 16,
-    color: "#d0d4dd",
-    marginBottom: 8,
-  },
-  titulo: {
-    fontWeight: "bold",
-    fontSize: 32,
-    color: "#fff",
-    marginBottom: 16,
-  },
-});
