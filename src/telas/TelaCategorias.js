@@ -2,56 +2,69 @@ import { View, StyleSheet, SectionList } from "react-native";
 
 import ComponenteCategoria from "../componentes/componenteCategoria";
 import ComponenteSuperCategoria from "../componentes/componenteSuperCategoria";
-import { Button } from "react-native-web";
 
-const novo_data = [
+const categorias = [
   {
+    id: "1",
     titulo: "Needs",
-    data: [
-      {
-        rotulo: "🛒 Mercado",
-        alvo: 200,
-        atribuido: 100,
-        gasto: 12,
-      },
-      {
-        rotulo: "⛽ Gasolina",
-        alvo: 2000,
-        atribuido: 9,
-        gasto: 2000,
-      },
-    ],
+    rotulo: "🛒 Mercado",
+    tipoAlvo: "",
+    alvo: 200,
+    atribuido: 100,
+    gasto: 12,
   },
   {
+    id: "2",
+    titulo: "Needs",
+    rotulo: "⛽ Gasolina",
+    tipoAlvo: "",
+    alvo: 2000,
+    atribuido: 9,
+    gasto: 2000,
+  },
+  {
+    id: "3",
     titulo: "Wants",
-    data: [
-      {
-        rotulo: "Explorações intergaláticas",
-        alvo: 2000000,
-        atribuido: 9,
-        gasto: 2000,
-      },
-      {
-        rotulo: "Papelaria",
-        alvo: 100,
-        atribuido: 100,
-        gasto: 0,
-      },
-    ],
+    rotulo: "Explorações intergaláticas",
+    tipoAlvo: "",
+    alvo: 2000000,
+    atribuido: 9,
+    gasto: 2000,
   },
   {
-    titulo: 'teste',
-    data: []
-  }
+    id: "4",
+    titulo: "Wants",
+    rotulo: "Papelaria",
+    tipoAlvo: "",
+    alvo: 100,
+    atribuido: 100,
+    gasto: 0,
+  },
+  {
+    id: "5",
+    titulo: "Teste",
+    rotulo: "Categoria vazia",
+    tipoAlvo: "",
+    alvo: 0,
+    atribuido: 0,
+    gasto: 0,
+  },
 ];
+
+const sections = Array.from(new Set(categorias.map((item) => item.titulo))).map(
+  (titulo) => ({
+    titulo,
+    data: categorias.filter((item) => item.titulo === titulo),
+  }),
+);
 
 export default function TelaCategorias({ navigation }) {
   return (
     <View style={styles.container}>
       <SectionList
         showsVerticalScrollIndicator={false}
-        sections={novo_data}
-        keyExtractor={(item) => item.rotulo}
+        sections={sections}
+        keyExtractor={(item) => item.id}
         style={styles.list}
         contentContainerStyle={styles.contentList}
         renderSectionHeader={({ section }) => (
@@ -60,8 +73,8 @@ export default function TelaCategorias({ navigation }) {
         renderItem={({ item }) => (
           <ComponenteCategoria
             rotulo={item.rotulo}
+            tipoAlvo={item.tipoAlvo}
             alvo={item.alvo}
-            alvoType={item.tipoAlvo}
             atribuido={item.atribuido}
             gasto={item.gasto}
           />

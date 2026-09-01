@@ -25,9 +25,10 @@ function calcularStatusMeta(alvo, atribuido) {
 
 export default function ComponenteCategoria({
   rotulo,
+  tipoAlvo,
   alvo,
   atribuido,
-  gasto
+  gasto,
 }) {
   return (
     <View style={styles.cardContainer}>
@@ -36,6 +37,7 @@ export default function ComponenteCategoria({
         Atribuído: {formatMoney(atribuido)}
       </Text>
 
+      <Text style={styles.cardBody}>Disponível: {formatMoney(atribuido-gasto)}</Text>
       <BarraProgresso alvo={alvo} atribuido={atribuido} gasto={gasto} />
 
       <View style={{ flexDirection: "row", justifyContent: "space-between" }}>
