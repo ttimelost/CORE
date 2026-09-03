@@ -5,8 +5,9 @@ const CategoriasContext = createContext();
 const categoriasIniciais = [
   {
     id: "1",
+    icone: "🛒",
     titulo: "Needs",
-    rotulo: "🛒 Mercado",
+    rotulo: "Mercado",
     tipoAlvo: "",
     alvo: 200,
     atribuido: 100,
@@ -14,8 +15,9 @@ const categoriasIniciais = [
   },
   {
     id: "2",
+    icone: "⛽",
     titulo: "Needs",
-    rotulo: "⛽ Gasolina",
+    rotulo: "Gasolina",
     tipoAlvo: "",
     alvo: 2000,
     atribuido: 9,
@@ -23,8 +25,9 @@ const categoriasIniciais = [
   },
   {
     id: "3",
+    icone: "🐦🐦",
     titulo: "Suborno",
-    rotulo: "Quem deixou o boleto para o pombo? 🐦🐦",
+    rotulo: "Quem deixou o boleto para o pombo?",
     tipoAlvo: "",
     alvo: 500,
     atribuido: 250,
@@ -32,8 +35,9 @@ const categoriasIniciais = [
   },
   {
     id: "4",
+    icone: "🐀",
     titulo: "Infraestrutura",
-    rotulo: "🐀 Aluguel do rato",
+    rotulo: "Aluguel do rato",
     tipoAlvo: "",
     alvo: 666,
     atribuido: 666,
@@ -41,8 +45,9 @@ const categoriasIniciais = [
   },
   {
     id: "5",
+    icone: "🕳️",
     titulo: "Infraestrutura",
-    rotulo: "🕳️ Manutenção do buraco",
+    rotulo: "Manutenção do buraco",
     tipoAlvo: "",
     alvo: 900,
     atribuido: 450,

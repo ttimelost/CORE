@@ -27,6 +27,7 @@ export default function TelaCategorias({ navigation }) {
         )}
         renderItem={({ item }) => (
           <ComponenteCategoria
+            icone={item.icone}
             rotulo={item.rotulo}
             tipoAlvo={item.tipoAlvo}
             alvo={item.alvo}
