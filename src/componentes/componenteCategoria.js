@@ -1,5 +1,5 @@
 import React from "react";
-import { View, Text, StyleSheet } from "react-native";
+import { View, Text, TouchableOpacity, StyleSheet } from "react-native";
 import BarraProgresso from "./BarraProgresso";
 
 const formatarMoeda = new Intl.NumberFormat("pt-BR", {
@@ -47,9 +47,11 @@ export default function ComponenteCategoria({
 
       <BarraProgresso alvo={alvo} atribuido={atribuido} gasto={gasto}/>
 
-      <View style={{ flexDirection: "row", justifyContent: "left", marginTop: 10 }}>
+      <View style={{ flexDirection: "row", justifyContent: "space-between", marginTop: 10 }}>
         <Text style={styles.cardBody}>{calcularStatusMeta(alvo, atribuido)}</Text>
-        
+        <TouchableOpacity style={styles.botao_remover}>
+          <Text style={{ color: '#fff', fontWeight: 'bold' }}>Remover</Text>
+        </TouchableOpacity>
       </View>
 
     </View>
@@ -79,5 +81,11 @@ const styles = StyleSheet.create({
     color: "#fff",
     padding: 2,
   },
+
+  botao_remover: {
+    borderRadius: 10,
+    backgroundColor: 'red',
+    padding: 5
+  }
 
 });
