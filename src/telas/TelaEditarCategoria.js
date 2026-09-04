@@ -17,7 +17,7 @@ export default function TelaEditarCategoria({ navigation, route }) {
 
   const editando = !!categoria;
 
-  const [icone, setIcone] = useState(categoria.icone);
+  const [icone, setIcone] = useState(categoria.icone); /* tem que colocar categoria?.icone mas tipo em tudo*/
   const [titulo, setTitulo] = useState(categoria.titulo);
   const [rotulo, setRotulo] = useState(categoria.rotulo);
   const [tipoAlvo, setTipoAlvo] = useState(categoria.tipoAlvo);
