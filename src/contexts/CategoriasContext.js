@@ -58,11 +58,26 @@ const categoriasIniciais = [
 export function CategoriasProvider({ children }) {
   const [categorias, setCategorias] = useState(categoriasIniciais);
 
+  // aparentemente assim é  mais seguro
   function adicionarCategoria(novaCategoria) {
-    setCategorias([...categorias, novaCategoria]);
+    setCategorias((categoriasAtuais) => [
+      ...categoriasAtuais,
+      novaCategoria,
+    ]);
   }
+
+  function removerCategoria(id_removido) {
+    setCategorias((categoriasAtuais) =>
+      categoriasAtuais.filter((catergoia) => categoria.id !== id_removido)
+    );
+  }
+
   return (
-    <CategoriasContext.Provider value={{ categorias, adicionarCategoria }}>
+    <CategoriasContext.Provider value={{
+      categorias,
+      adicionarCategoria,
+      removerCategoria
+    }}>
       {children}
     </CategoriasContext.Provider>
   );

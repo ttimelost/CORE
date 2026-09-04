@@ -5,11 +5,16 @@ export default function ComponenteSuperCategoria({ rotulo, navigation }) {
   return (
     <View>
       <Text style={styles.titulo}>{rotulo}</Text>
+
       <TouchableOpacity
         style={styles.botao}
-        onPress={() => navigation.navigate('AddCategoria')}
+        onPress={() =>
+          navigation.navigate("EditarCategoria", {
+            titulo: rotulo,
+          })
+        }
       >
-        <Text style={styles.textoBotao}>Joao</Text>
+        <Text style={styles.textoBotao}>Editar</Text>
       </TouchableOpacity>
     </View>
   );

@@ -23,38 +23,47 @@ function calcularStatusMeta(alvo, atribuido) {
   return `Faltam ${formatMoney(alvo - atribuido)}`;
 }
 
-export default function ComponenteCategoria({
-  icone,
-  rotulo,
-  tipoAlvo,
-  alvo,
-  atribuido,
-  gasto,
-}) {
+export default function ComponenteCategoria({ categoria, navigation }) {
+  const {
+    icone,
+    rotulo,
+    tipoAlvo,
+    alvo,
+    atribuido,
+    gasto } = categoria /* Encapsulei esse cocô por que senão fica uma bosta  */
+
   return (
-    <View style={styles.cardContainer}>
+    <TouchableOpacity /* Eu ainda não sei o comportamento ideal de quando clica na categoria,
+    se deve abrir mesmo a tela de editar ela ou talvez abrir a tela de adicionar transacao com ela
+    como a categoria da transação? */
+      onPress={() => {
+        navigation.navigate("EditarCategoria", {
+          categoria,
+        })
+      }
+      }
+    >
+      <View style={styles.cardContainer}>
 
-      <View style={{ flexDirection: "row", justifyContent : "space-between", marginBottom: 30 }}>
-        <Text style={styles.cardTitle}>{icone}</Text>
-        <Text style={styles.cardTitle}>{rotulo}</Text>
+        <View style={{ flexDirection: "row", justifyContent: "space-between", marginBottom: 30 }}>
+          <Text style={styles.cardTitle}>{icone}</Text>
+          <Text style={styles.cardTitle}>{rotulo}</Text>
+        </View>
+
+        <View style={{ flexDirection: "row", justifyContent: "space-between", marginBottom: 10 }}>
+          <Text style={styles.cardBody}>Disponível: {formatMoney(atribuido - gasto)}</Text> {/*O que que isso significa???? r: veja o comentario no commit ef24418*/}
+          <Text style={styles.cardBody}>Atribuído: {formatMoney(atribuido)}</Text>
+          <Text style={styles.cardBody}>Alvo: {formatMoney(alvo)}</Text>
+        </View>
+
+        <BarraProgresso alvo={alvo} atribuido={atribuido} gasto={gasto} />
+
+        <View style={{ flexDirection: "row", justifyContent: "space-between", marginTop: 10 }}>
+          <Text style={styles.cardBody}>{calcularStatusMeta(alvo, atribuido)}</Text>
+        </View>
+
       </View>
-
-      <View style={{ flexDirection: "row", justifyContent : "space-between", marginBottom: 10 }}>
-        <Text style={styles.cardBody}>Disponível: {formatMoney(atribuido-gasto)}</Text> {/*O que que isso significa????*/}
-        <Text style={styles.cardBody}>Atribuído: {formatMoney(atribuido)}</Text>
-        <Text style={styles.cardBody}>Alvo: {formatMoney(alvo)}</Text>
-      </View>
-
-      <BarraProgresso alvo={alvo} atribuido={atribuido} gasto={gasto}/>
-
-      <View style={{ flexDirection: "row", justifyContent: "space-between", marginTop: 10 }}>
-        <Text style={styles.cardBody}>{calcularStatusMeta(alvo, atribuido)}</Text>
-        <TouchableOpacity style={styles.botao_remover}>
-          <Text style={{ color: '#fff', fontWeight: 'bold' }}>Remover</Text>
-        </TouchableOpacity>
-      </View>
-
-    </View>
+    </TouchableOpacity>
   );
 }
 

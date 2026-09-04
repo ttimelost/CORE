@@ -4,7 +4,7 @@ import { createNativeStackNavigator } from '@react-navigation/native-stack';
 import TelaRegistro from '../telas/TelaRegistro';
 import NavegacaoBottom from './NavegacaoBottom';
 import TelaBemVindo1 from '../telas/TelaBemVindo1';
-import TelaAddCategoria from '../telas/TelaAddCategoria';
+import TelaEditarCategoria from '../telas/TelaEditarCategoria';
 
 const Stack = createNativeStackNavigator();
 
@@ -25,8 +25,8 @@ export default function NavegacaoStack() {
         options={{ gestureEnabled: false }}
       />
       <Stack.Screen 
-        name="AddCategoria"
-        component={TelaAddCategoria}
+        name="EditarCategoria"
+        component={TelaEditarCategoria}
       />
     </Stack.Navigator>
   );
