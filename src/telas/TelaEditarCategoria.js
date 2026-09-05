@@ -17,10 +17,10 @@ export default function TelaEditarCategoria({ navigation, route }) {
 
   const editando = !!categoria;
 
-  const [icone, setIcone] = useState(categoria.icone); /* tem que colocar categoria?.icone mas tipo em tudo*/
-  const [titulo, setTitulo] = useState(categoria.titulo);
-  const [rotulo, setRotulo] = useState(categoria.rotulo);
-  const [tipoAlvo, setTipoAlvo] = useState(categoria.tipoAlvo);
+  const [icone, setIcone] = useState(categoria.icone ?? ""); /* tem que colocar categoria?.icone mas tipo em tudo*/
+  const [titulo, setTitulo] = useState(categoria.titulo ?? "");
+  const [rotulo, setRotulo] = useState(categoria.rotulo ?? "");
+  const [tipoAlvo, setTipoAlvo] = useState(categoria.tipoAlvo ?? ""); /* q q cacetes é tipo alvo?*/
   const [alvo, setAlvo] = useState(
     categoria.alvo == null ? "" : String(categoria.alvo) /* se for nulo, deixa vazio, se não deixa em string  */
   );
@@ -36,7 +36,7 @@ export default function TelaEditarCategoria({ navigation, route }) {
 
       atribuido: categoria.atribuido ?? 0, 
       gasto: categoria.gasto ?? 0,
-    }
+    };
 
     if (editando) {
       editarCategoria(categoriaFormulario);
@@ -95,17 +95,16 @@ export default function TelaEditarCategoria({ navigation, route }) {
         keyboardType="numeric"
       />
 
-      <Button
-        title={editando ? "Salvar alterações" : "Criar categoria"} /* é tipo aquele bagulho de ta logado ou nao que o Salu falou */
-        onPress={handleSalvar}
-      />
+      <TouchableOpacity style={styles.botaoSalvar} onPress={handleSalvar}> 
+        <Text style={styles.textoBotao}>{editando ? "Salvar alterações" : "Criar categoria"}</Text>
+      </TouchableOpacity>
 
       {editando && (
         <TouchableOpacity
           style={styles.botaoRemover}
           onPress={handleRemover}
         >
-          <Text style={styles.textoRemover}>
+          <Text style={styles.textoBotao}>
             Remover categoria
           </Text>
         </TouchableOpacity>
@@ -141,6 +140,7 @@ const styles = StyleSheet.create({
     borderRadius: 8,
     padding: 12,
     fontSize: 16,
+    marginBottom: 10
   },
 
   botaoRemover: {
@@ -151,7 +151,15 @@ const styles = StyleSheet.create({
     alignItems: "center",
   },
 
-  textoRemover: {
+  botaoSalvar: {
+    backgroundColor: "green",
+    padding: 14,
+    borderRadius: 8,
+    marginTop: 20,
+    alignItems: "center",
+  },
+  
+  textoBotao: {
     color: "#fff",
     fontWeight: "bold",
   },

@@ -1,6 +1,8 @@
-import React, { createContext, useContext, useState } from "react";
+import React, { createContext, useContext, useEffect, useRef, useState } from "react";
+import AsyncStorage from "@react-native-async-storage/async-storage";
 
 const CategoriasContext = createContext();
+const CATEGORIAS_STORAGE_KEY = "categorias";
 
 const categoriasIniciais = [
   {
@@ -57,6 +59,36 @@ const categoriasIniciais = [
 
 export function CategoriasProvider({ children }) {
   const [categorias, setCategorias] = useState(categoriasIniciais);
+  const carregamentoConcluido = useRef(false);
+
+  useEffect(() => {
+    async function carregarCategorias() {
+      try {
+        const categoriasSalvas = await AsyncStorage.getItem(CATEGORIAS_STORAGE_KEY);
+
+        if (categoriasSalvas) {
+          setCategorias(JSON.parse(categoriasSalvas));
+        }
+      } catch (erro) {
+        console.error("Não foi possível carregar as categorias salvas.", erro);
+      } finally {
+        carregamentoConcluido.current = true;
+      }
+    }
+
+    carregarCategorias();
+  }, []);
+
+  useEffect(() => {
+    if (!carregamentoConcluido.current) return;
+
+    AsyncStorage.setItem(
+      CATEGORIAS_STORAGE_KEY,
+      JSON.stringify(categorias)
+    ).catch((erro) => {
+      console.error("Não foi possível salvar as categorias.", erro);
+    });
+  }, [categorias]);
 
   // aparentemente assim é  mais seguro
   function adicionarCategoria(novaCategoria) {
@@ -66,9 +98,17 @@ export function CategoriasProvider({ children }) {
     ]);
   }
 
-  function removerCategoria(id_removido) {
+  function editarCategoria(escolhaCategoria) {
     setCategorias((categoriasAtuais) =>
-      categoriasAtuais.filter((catergoia) => categoria.id !== id_removido)
+      categoriasAtuais.map((categoria) =>
+        categoria.id === escolhaCategoria.id ? escolhaCategoria : categoria
+      )
+    );
+  }
+
+  function removerCategoria(idRemovido) {
+    setCategorias((categoriasAtuais) =>
+      categoriasAtuais.filter((categoria) => categoria.id !== idRemovido)
     );
   }
 
@@ -76,6 +116,7 @@ export function CategoriasProvider({ children }) {
     <CategoriasContext.Provider value={{
       categorias,
       adicionarCategoria,
+      editarCategoria,
       removerCategoria
     }}>
       {children}
