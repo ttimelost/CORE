@@ -1,21 +1,10 @@
 import React from "react";
-import { View, Text, StyleSheet, TouchableOpacity } from "react-native";
+import { View, Text, StyleSheet } from "react-native";
 
 export default function ComponenteSuperCategoria({ rotulo, navigation }) {
   return (
     <View>
       <Text style={styles.titulo}>{rotulo}</Text>
-
-      <TouchableOpacity
-        style={styles.botao}
-        onPress={() =>
-          navigation.navigate("EditarCategoria", {
-            titulo: rotulo,
-          })
-        }
-      >
-        <Text style={styles.textoBotao}>Editar</Text>
-      </TouchableOpacity>
     </View>
   );
 }
