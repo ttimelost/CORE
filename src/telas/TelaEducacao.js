@@ -1,12 +1,25 @@
 import React from 'react';
-import { View, Text, StyleSheet } from 'react-native';
+import { View, Text, StyleSheet, FlatList } from 'react-native';
+import ModuloEducacao from '../componentes/ModuloEducacao';
+import { useEducacao } from '../contexts/EducacaoContext';
 
 export default function TelaEducacao({ navigation }) {
+  const { modulosEducacao } = useEducacao();
+
   return (
     <View style={styles.container}>
-      <View style={styles.card}>
-        <Text style={styles.titulo}>Tela educacao</Text>
-      </View>
+      <Text style={styles.titulo}>Educação</Text>
+      <FlatList
+        showsVerticalScrollIndicator={false}
+        data={Object.values(modulosEducacao)}
+        keyExtractor={(item) => String(item.id)}
+        renderItem={({ item }) => (
+          <ModuloEducacao
+            modulo={item}
+            navigation={navigation}
+          />
+        )}
+      />
     </View>
   );
 }
@@ -15,7 +28,6 @@ const styles = StyleSheet.create({
   container: {
     flex: 1,
     backgroundColor: "#121315",
-    alignItems: "center",
     justifyContent: "center",
     paddingHorizontal: 20,
     paddingVertical: 24,
@@ -37,7 +49,7 @@ const styles = StyleSheet.create({
   },
   titulo: {
     fontWeight: "bold",
-    fontSize: 32,
+    fontSize: 36,
     color: "#fff",
     marginBottom: 16,
   },

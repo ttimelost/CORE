@@ -3,6 +3,7 @@ import { View, Text, ActivityIndicator, StyleSheet } from 'react-native';
 import NavegacaoStack from "./src/navegacao/NavegacaoStack"
 import { NavigationContainer } from '@react-navigation/native';
 import { CategoriasProvider } from './src/contexts/CategoriasContext';
+import {EducacaoProvider} from './src/contexts/EducacaoContext'
 
 const NavegadorAtual = NavegacaoStack
 
@@ -27,7 +28,9 @@ export default function App() {
   return(
     <NavigationContainer>
       <CategoriasProvider>
-        <NavegacaoStack/>
+        <EducacaoProvider>
+          <NavegacaoStack/>
+        </EducacaoProvider>
       </CategoriasProvider>
     </NavigationContainer>
   )

@@ -33,9 +33,13 @@ export default function ComponenteCategoria({ categoria, navigation }) {
     gasto } = categoria /* Encapsulei esse cocô por que senão fica uma bosta  */
 
   return (
-    <TouchableOpacity /* Eu ainda não sei o comportamento ideal de quando clica na categoria,
+    <TouchableOpacity /* v- Eu ainda não sei o comportamento ideal de quando clica na categoria,
     se deve abrir mesmo a tela de editar ela ou talvez abrir a tela de adicionar transacao com ela
-    como a categoria da transação? */
+    como a categoria da transação? */ 
+    /*a- e uma boa pergunta, mas tem q so tomar cuidado pq nem sempre que essta tela e aberta
+    significa que vai ocorrer uma transação. Eu acho que em algum momento a gente bota alguma configuracao
+    que detecta quando tem uma alteracao no campo de valor atribuido e abre uma sublista com outras informacoes 
+    campos referentes a categoria. VISUALIZAR EXEMPLO_TRANSACAO.PNG*/
       onPress={() => {
         navigation.navigate("EditarCategoria", {
           categoria,

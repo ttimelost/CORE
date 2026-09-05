@@ -16,10 +16,4 @@ const styles = StyleSheet.create({
     color: "white",
     padding: 15,
   },
-  botao: {
-    // escreve codisa aiqwu
-  },
-  textoBotao: {
-    color: "white"
-  }
 });
