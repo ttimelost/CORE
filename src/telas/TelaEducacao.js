@@ -29,7 +29,7 @@ const styles = StyleSheet.create({
     flex: 1,
     backgroundColor: "#121315",
     justifyContent: "center",
-    paddingHorizontal: 20,
+    paddingHorizontal: 5,
     paddingVertical: 24,
   },
   card: {
@@ -51,6 +51,8 @@ const styles = StyleSheet.create({
     fontWeight: "bold",
     fontSize: 36,
     color: "#fff",
-    marginBottom: 72,
+    marginBottom: 48,
+    marginTop: 48,
+    paddingHorizontal: 20,
   },
 });

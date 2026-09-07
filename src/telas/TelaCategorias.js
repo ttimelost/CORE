@@ -1,5 +1,5 @@
 import React from "react";
-import { View, StyleSheet, SectionList } from "react-native";
+import { Text, View, StyleSheet, SectionList } from "react-native";
 import ComponenteCategoria from "../componentes/componenteCategoria";
 import ComponenteSuperCategoria from "../componentes/componenteSuperCategoria";
 import { useCategorias } from "../contexts/CategoriasContext";
@@ -16,6 +16,9 @@ export default function TelaCategorias({ navigation }) {
 
   return (
     <View style={styles.container}>
+      <View style={{ alignItems: "left" }}>
+        <Text style={styles.titulo}>Temporario</Text>
+      </View>
       <SectionList
         showsVerticalScrollIndicator={false}
         sections={sections}
@@ -45,6 +48,15 @@ const styles = StyleSheet.create({
     backgroundColor: "#121315",
     alignItems: "center",
     justifyContent: "center",
+    paddingHorizontal: 5,
+    paddingVertical: 24,
+  },
+  titulo: {
+    fontWeight: "bold",
+    fontSize: 36,
+    color: "#fff",
+    marginBottom: 48,
+    marginTop: 48
   },
   list: {
     width: "90%",

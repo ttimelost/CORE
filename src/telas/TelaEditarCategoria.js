@@ -124,7 +124,8 @@ const styles = StyleSheet.create({
     color: "#fff",
     fontSize: 24,
     fontWeight: "600",
-    marginBottom: 30,
+    marginBottom: 48,
+    marginTop: 48,
   },
 
   label: {
