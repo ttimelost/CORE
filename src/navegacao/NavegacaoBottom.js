@@ -8,7 +8,16 @@ const Tab = createBottomTabNavigator();
 
 export default function NavegacaoBottom() {
     return (
-        <Tab.Navigator screenOptions={{ headerShown: false }}>
+        <Tab.Navigator screenOptions={{
+            headerShown: false,
+            tabBarStyle: {
+                position: "absolute",
+                borderRadius: 20,
+                backgroundColor: "black",
+                borderTopWidth: 0,
+                height: 85,
+                },
+            }}>
             <Tab.Screen 
             name="Categorias"
             component={TelaCategorias}
