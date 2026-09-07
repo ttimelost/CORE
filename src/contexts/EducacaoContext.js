@@ -7,6 +7,7 @@ const modulos = {
         id : 1,
         titulo: "Modulo 1",
         descricao: "Descrição do módulo 1",
+        imagem: require("../../assets/images/educacao/modulo1png.jpg")
     },
     modulo2: {
         id : 2,

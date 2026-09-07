@@ -76,17 +76,17 @@ const styles = StyleSheet.create({
     marginTop: "auto",
     marginBottom: 70,
     borderWidth: 2,
-    borderColor: "#fff",
+    borderColor: "#2b8820",
     borderRadius: 30,
     width: 220,
     height: 55,
-    backgroundColor: "#ffffff",
+    backgroundColor: "#2b8820",
     justifyContent: "center",
     alignItems: "center",
   },
   botaoTexto: {
     fontSize: 20,
-    color: "black"
+    color: "white"
   },
 
 });
