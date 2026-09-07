@@ -55,13 +55,13 @@ const styles = StyleSheet.create({
     overflow: "hidden"
   },
   texto: {
-    fontSize: 14,
+    fontSize: 16,
     color: "#fff",
     marginBottom: 8,
   },
   titulo: {
     fontWeight: "bold",
-    fontSize: 32,
+    fontSize: 34,
     color: "#fff",
     marginBottom: 16,
   },

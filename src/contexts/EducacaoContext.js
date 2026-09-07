@@ -5,8 +5,8 @@ const EducacaoContext = createContext();
 const modulos = {
     modulo1: {
         id : 1,
-        titulo: "Modulo 1",
-        descricao: "Descrição do módulo 1",
+        titulo: "Iniciacao",
+        descricao: "Aqui você vai aprender os fundamentos sobre dinheiro. Renda e salário, despesas, diferença entre necessidade e desejo, entre outros tópicos relevantes para começar a entender como manusear seu dinheiro.",
         imagem: require("../../assets/images/educacao/modulo1png.jpg")
     },
     modulo2: {
