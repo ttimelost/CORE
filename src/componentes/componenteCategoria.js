@@ -33,10 +33,10 @@ export default function ComponenteCategoria({ categoria, navigation }) {
     gasto } = categoria /* Encapsulei esse cocô por que senão fica uma bosta  */
 
   return (
-    <TouchableOpacity /* v- Eu ainda não sei o comportamento ideal de quando clica na categoria,
+    <TouchableOpacity /* @vitor Eu ainda não sei o comportamento ideal de quando clica na categoria,
     se deve abrir mesmo a tela de editar ela ou talvez abrir a tela de adicionar transacao com ela
     como a categoria da transação? */ 
-    /*a- e uma boa pergunta, mas tem q so tomar cuidado pq nem sempre que essta tela e aberta
+    /*@arthur e uma boa pergunta, mas tem q so tomar cuidado pq nem sempre que essta tela e aberta
     significa que vai ocorrer uma transação. Eu acho que em algum momento a gente bota alguma configuracao
     que detecta quando tem uma alteracao no campo de valor atribuido e abre uma sublista com outras informacoes 
     campos referentes a categoria. VISUALIZAR EXEMPLO_TRANSACAO.PNG*/
@@ -58,6 +58,7 @@ export default function ComponenteCategoria({ categoria, navigation }) {
           <Text style={styles.cardBody}>Disponível: {formatMoney(atribuido - gasto)}</Text> {/*O que que isso significa???? r: veja o comentario no commit ef24418*/}
           <Text style={styles.cardBody}>Atribuído: {formatMoney(atribuido)}</Text>
           <Text style={styles.cardBody}>Alvo: {formatMoney(alvo)}</Text>
+          <Text style={styles.cardBody}>Gasto: {formatMoney(gasto)}</Text>
         </View>
 
         <BarraProgresso alvo={alvo} atribuido={atribuido} gasto={gasto} />
