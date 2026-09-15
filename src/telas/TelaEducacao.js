@@ -10,6 +10,7 @@ export default function TelaEducacao({ navigation }) {
     <View style={styles.container}>
       <Text style={styles.titulo}>Educação</Text>
       <FlatList
+        style={{ marginBottom: 50 }}
         showsVerticalScrollIndicator={false}
         data={Object.values(modulosEducacao)}
         keyExtractor={(item) => String(item.id)}

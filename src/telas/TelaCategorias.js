@@ -59,6 +59,7 @@ const styles = StyleSheet.create({
   },
   list: {
     width: "90%",
+    marginBottom: 50,
   },
   contentList: {
     paddingBottom: 24,
