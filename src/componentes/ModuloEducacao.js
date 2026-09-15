@@ -16,7 +16,7 @@ export default function ModuloEducacao({ modulo, navigation }) {
           <Text style={styles.titulo}>{modulo.titulo}</Text>
           <Text style={styles.texto}>{modulo.descricao}</Text>
           <View style={{ flexDirection: "row", justifyContent: "flex-end", marginTop: 16 }}>
-            <TouchableOpacity style={styles.botao}>
+            <TouchableOpacity style={styles.botao} onPress={() => navigation.navigate(modulo.tela)}>
               <Text style={{ fontSize: 24, fontWeight: "bold", color: "white" }}>▶</Text>
             </TouchableOpacity>
           </View>

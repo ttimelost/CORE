@@ -55,9 +55,14 @@ export default function TelaEditarCategoria({ navigation, route }) {
 
   return (
     <View style={styles.container}>
-      <Text style={styles.titulo}>
-        {editando ? "Editar categoria" : "Nova categoria"}
-      </Text>
+      <View style={{ flexDirection: "row", justifyContent: "space-between", alignItems: "center" }}>
+        <Text style={styles.titulo}>
+          {editando ? "Editar categoria" : "Nova categoria"}
+        </Text>
+        <TouchableOpacity style={styles.botaoVoltar} onPress={() => navigation.goBack()}>
+          <Text style={{ color: "#fff", fontSize: 16 }}>Voltar</Text>
+        </TouchableOpacity>
+      </View>
 
       <Text style={styles.label}>Ícone</Text>
       <TextInput
@@ -126,6 +131,13 @@ const styles = StyleSheet.create({
     fontWeight: "600",
     marginBottom: 48,
     marginTop: 48,
+  },
+
+  botaoVoltar: {
+    backgroundColor: "#28292e",
+    padding: 10,
+    borderRadius: 8,
+    color: "#fff",
   },
 
   label: {

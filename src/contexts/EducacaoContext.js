@@ -7,7 +7,8 @@ const modulos = {
         id : 1,
         titulo: "Iniciacao",
         descricao: "Aqui você vai aprender os fundamentos sobre dinheiro. Renda e salário, despesas, diferença entre necessidade e desejo, entre outros tópicos relevantes para começar a entender como manusear seu dinheiro.",
-        imagem: require("../../assets/images/educacao/modulo1png.jpg")
+        imagem: require("../../assets/images/educacao/modulo1png.jpg"),
+        tela: "ModEd1"
     },
     modulo2: {
         id : 2,

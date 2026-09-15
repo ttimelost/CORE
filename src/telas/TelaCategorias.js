@@ -55,8 +55,7 @@ const styles = StyleSheet.create({
     fontWeight: "bold",
     fontSize: 36,
     color: "#fff",
-    marginBottom: 48,
-    marginTop: 48
+    margin: 48,
   },
   list: {
     width: "90%",
