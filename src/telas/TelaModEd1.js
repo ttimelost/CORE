@@ -1,4 +1,4 @@
-import {View, Text, TouchableOpacity, Image, StyleSheet} from "react-native";
+import {View, Text, TouchableOpacity, ImageBackground, StyleSheet} from "react-native";
 
 export default function TelaModEd1({ navigation }) {
     return (
@@ -11,10 +11,15 @@ export default function TelaModEd1({ navigation }) {
             </TouchableOpacity>
           </View>
           <View style={styles.imagem}>
-            <Image />
+            <ImageBackground source={require('../../assets/images/educacao/modulo1CONTEUDOpng.jpg')} resizeMode="cover" style={styles.imagem} />
           </View>
           <View style={styles.conteudo}>
-            <Text style={styles.texto}>Lorem ipsum dolor sit amet</Text>
+            <Text style={styles.texto}>
+              {"\u2003"} O dinheiro se apresenta como uma parte indispensavel em todas as nossas vidas.
+              Aprender sobre dinheiro não significa saber investir ou ganhar muito, mas entender
+              como organizar o que você recebe para conseguir pagar suas despesas, lidar com imprevistos 
+              e alcançar seus objetivos.
+            </Text>
           </View>
         </View>
 
@@ -48,6 +53,7 @@ const styles = StyleSheet.create({
     width: 200,
     height: 200,
     marginBottom: 20,
+    alignSelf: 'center',
   },
   conteudo: {
     paddingHorizontal: 20,
@@ -56,5 +62,6 @@ const styles = StyleSheet.create({
   texto: {
     fontSize: 16,
     color: '#fff',
+    textAlign: 'justify',
   },
 });
