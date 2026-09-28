@@ -27,7 +27,7 @@ export default function TelaEditarCategoria({ navigation, route }) {
 
   const handleSalvar = () => {
     const categoriaFormulario = {
-      id: categoria.id ?? String(Date.now()), /* se for vazia usa o horário */
+      id: categoria.id ?? String(Date.now()), /* se for vazia usa o horário Re: isso é completamente idiota, mas daqui ha pouco vira sqlite ent ta dboas */
       icone,
       titulo,
       rotulo,

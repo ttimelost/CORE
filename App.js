@@ -4,6 +4,7 @@ import NavegacaoStack from "./src/navegacao/NavegacaoStack"
 import { NavigationContainer } from '@react-navigation/native';
 import { CategoriasProvider } from './src/contexts/CategoriasContext';
 import {EducacaoProvider} from './src/contexts/EducacaoContext'
+import { TransacoesProvider } from './src/contexts/TransacoesContext';
 
 const NavegadorAtual = NavegacaoStack
 
@@ -29,7 +30,9 @@ export default function App() {
     <NavigationContainer>
       <CategoriasProvider>
         <EducacaoProvider>
-          <NavegacaoStack/>
+          <TransacoesProvider> {/* 20 minutos só pra desistir e perguntar pro chatgpt pq nao ta funcionando só pra descobrir essa escrtidão........ */}
+            <NavegacaoStack/>
+          </TransacoesProvider>
         </EducacaoProvider>
       </CategoriasProvider>
     </NavigationContainer>

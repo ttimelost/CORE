@@ -3,6 +3,7 @@ import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
 
 import TelaCategorias from '../telas/TelaCategorias';
 import TelaEducacao from '../telas/TelaEducacao';
+import TelaTransacoes from '../telas/TelaTransacoes';
 
 const Tab = createBottomTabNavigator();
 
@@ -16,15 +17,19 @@ export default function NavegacaoBottom() {
                 backgroundColor: "black",
                 borderTopWidth: 0,
                 height: 85,
-                },
-            }}>
-            <Tab.Screen 
-            name="Categorias"
-            component={TelaCategorias}
+            },
+        }}>
+            <Tab.Screen
+                name="Categorias"
+                component={TelaCategorias}
             />
-            <Tab.Screen 
-            name="Educacao"
-            component={TelaEducacao}
+            <Tab.Screen
+                name="Educacao"
+                component={TelaEducacao}
+            />
+            <Tab.Screen
+                name="Transações"
+                component={TelaTransacoes}
             />
         </Tab.Navigator>
     )
