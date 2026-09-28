@@ -5,15 +5,13 @@ import {
   Button,
   StyleSheet,
   TouchableOpacity,
-  FlatList
+  FlatList,
 } from "react-native";
-import React from 'react'
+import React from "react";
 import ItemTransacao from "../componentes/itemTransacao";
 import { useTransacoes } from "../contexts/TransacoesContext";
 
-
-
-export default function TelaTransacoes() {
+export default function TelaTransacoes({ navigation }) {
   const { transacoes } = useTransacoes();
 
   return (
@@ -24,16 +22,13 @@ export default function TelaTransacoes() {
         keyExtractor={(item) => item.id}
         data={transacoes}
         renderItem={({ item }) => (
-          <ItemTransacao transacao={item} />
+          <ItemTransacao transacao={item} navigation={navigation} />
         )}
       />
-
     </View>
-  )
+  );
 }
 
 const styles = StyleSheet.create({
-  container: {
-
-  }
-})
+  container: {},
+});

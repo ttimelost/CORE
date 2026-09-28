@@ -14,23 +14,23 @@ export default function TelaEditarTransacao({ navigation, route }) {
   const { adicionarTransacao, editarTransacao, removerTransacao } =
     useTransacoes(); // depois bora condensar isso tudo pra editar categoria, né?
 
-  const categorias = useCategorias();
+  const { categorias } = useCategorias();
   const transacao = route.params?.transacao;
 
   const editando = !!transacao; // se não tiver vazio
 
-  const [valor, setValor] = useState(transacao.valor ?? "");
+  const [valor, setValor] = useState(transacao?.valor ?? "");
   const [beneficiario, setBeneficiario] = useState(
-    transacao.beneficiario ?? "",
+    transacao?.beneficiario ?? "",
   );
   const [id_categoria, setId_categoria] = useState(
-    transacao.id_categoria ?? "",
+    transacao?.id_categoria ?? "",
   );
-  const [data, setData] = useState(transacao.data ?? "");
+  const [data, setData] = useState(transacao?.data ?? "");
 
   const handleSalvar = () => {
     const transacaoFormulario = {
-      id: transacao.id ?? String(Date.now()),
+      id: transacao?.id ?? String(Date.now()),
       valor,
       beneficiario,
       id_categoria,
@@ -94,3 +94,29 @@ export default function TelaEditarTransacao({ navigation, route }) {
     </View>
   );
 }
+
+const styles = StyleSheet.create({
+  container: {
+    flex: 1,
+    backgroundColor: "#121315",
+    padding: 20,
+  },
+  titulo: {
+    color: "#fff",
+    fontSize: 24,
+    fontWeight: "600",
+    marginTop: 48,
+    marginBottom: 32,
+  },
+  botaoVoltar: {
+    backgroundColor: "#28292e",
+    padding: 10,
+    borderRadius: 8,
+  },
+  label: {
+    color: "#fff",
+    fontSize: 14,
+    marginTop: 12,
+    marginBottom: 5,
+  },
+});
