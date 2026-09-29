@@ -25,18 +25,18 @@ export default function App() {
       </View>
     );
   }
-
-  return(
+  
+  return (
     <NavigationContainer>
-      <CategoriasProvider>
-        <EducacaoProvider>
-          <TransacoesProvider> {/* 20 minutos só pra desistir e perguntar pro chatgpt pq nao ta funcionando só pra descobrir essa escrtidão........ */}
-            <NavegacaoStack/>
-          </TransacoesProvider>
-        </EducacaoProvider>
-      </CategoriasProvider>
+      <TransacoesProvider>
+        <CategoriasProvider>
+          <EducacaoProvider>
+            <NavegacaoStack />
+          </EducacaoProvider>
+        </CategoriasProvider>
+      </TransacoesProvider>
     </NavigationContainer>
-  )
+  );
 
 }
 

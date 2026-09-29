@@ -55,7 +55,7 @@ export default function ComponenteCategoria({ categoria, navigation }) {
         </View>
 
         <View style={{ flexDirection: "row", justifyContent: "space-between", marginBottom: 10 }}>
-          <Text style={styles.cardBody}>Disponível: {formatMoney(atribuido - gasto)}</Text> {/*O que que isso significa???? r: veja o comentario no commit ef24418*/}
+          <Text style={styles.cardBody}>Disponível: {formatMoney(atribuido - gasto)}</Text>
           <Text style={styles.cardBody}>Atribuído: {formatMoney(atribuido)}</Text>
           <Text style={styles.cardBody}>Alvo: {formatMoney(alvo)}</Text>
           <Text style={styles.cardBody}>Gasto: {formatMoney(gasto)}</Text>

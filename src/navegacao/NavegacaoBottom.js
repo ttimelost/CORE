@@ -23,13 +23,13 @@ export default function NavegacaoBottom() {
                 name="Categorias"
                 component={TelaCategorias}
             />
+                <Tab.Screen
+                    name="Transações"
+                    component={TelaTransacoes}
+                />
             <Tab.Screen
                 name="Educacao"
                 component={TelaEducacao}
-            />
-            <Tab.Screen
-                name="Transações"
-                component={TelaTransacoes}
             />
         </Tab.Navigator>
     )

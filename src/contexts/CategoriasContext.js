@@ -1,5 +1,12 @@
-import React, { createContext, useContext, useEffect, useRef, useState } from "react";
+import React, {
+  createContext,
+  useContext,
+  useEffect,
+  useRef,
+  useState,
+} from "react";
 import AsyncStorage from "@react-native-async-storage/async-storage";
+import { useTransacoes } from "./TransacoesContext";
 
 const CategoriasContext = createContext();
 const CATEGORIAS_STORAGE_KEY = "categorias";
@@ -13,7 +20,6 @@ const categoriasIniciais = [
     tipoAlvo: "",
     alvo: 200,
     atribuido: 100,
-    gasto: 12,
   },
   {
     id: "2",
@@ -23,7 +29,6 @@ const categoriasIniciais = [
     tipoAlvo: "",
     alvo: 2000,
     atribuido: 9,
-    gasto: 2000,
   },
   {
     id: "3",
@@ -33,7 +38,6 @@ const categoriasIniciais = [
     tipoAlvo: "",
     alvo: 500,
     atribuido: 250,
-    gasto: 3,
   },
   {
     id: "6",
@@ -43,7 +47,6 @@ const categoriasIniciais = [
     tipoAlvo: "",
     alvo: 200,
     atribuido: 200,
-    gasto: 3,
   },
   {
     id: "4",
@@ -53,7 +56,6 @@ const categoriasIniciais = [
     tipoAlvo: "",
     alvo: 2000,
     atribuido: 666,
-    gasto: 13,
   },
   {
     id: "5",
@@ -63,13 +65,14 @@ const categoriasIniciais = [
     tipoAlvo: "",
     alvo: 9000,
     atribuido: 450,
-    gasto: 901,
   }
 ];
 
 export function CategoriasProvider({ children }) {
   const [categorias, setCategorias] = useState(categoriasIniciais);
   const carregamentoConcluido = useRef(false);
+
+  const { transacoes } = useTransacoes();
 
   useEffect(() => {
     async function carregarCategorias() {
@@ -122,13 +125,41 @@ export function CategoriasProvider({ children }) {
     );
   }
 
+  const hoje = new Date();
+
+  const categoriasComGasto = categorias.map((categoria) => {
+    const gasto = transacoes
+      .filter((transacao) => {
+        const dataTransacao = new Date(transacao.data);
+
+        const mesmoMes =
+          dataTransacao.getMonth() === hoje.getMonth() &&
+          dataTransacao.getFullYear() === hoje.getFullYear();
+
+        const mesmaCategoria =
+          transacao.id_categoria === categoria.id;
+
+        return mesmoMes && mesmaCategoria;
+      })
+      .reduce((total, transacao) => {
+        return total + Number(transacao.valor);
+      }, 0);
+
+    return {
+      ...categoria,
+      gasto,
+    };
+  });
+
   return (
-    <CategoriasContext.Provider value={{
-      categorias,
-      adicionarCategoria,
-      editarCategoria,
-      removerCategoria
-    }}>
+    <CategoriasContext.Provider
+      value={{
+        categorias: categoriasComGasto,
+        adicionarCategoria,
+        editarCategoria,
+        removerCategoria,
+      }}
+    >
       {children}
     </CategoriasContext.Provider>
   );

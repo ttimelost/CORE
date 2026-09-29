@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { memo, useState } from "react";
 import {
   Text,
   TextInput,
@@ -11,15 +11,16 @@ import { useTransacoes } from "../contexts/TransacoesContext";
 import { useCategorias } from "../contexts/CategoriasContext";
 
 export default function TelaEditarTransacao({ navigation, route }) {
-  const { adicionarTransacao, editarTransacao, removerTransacao } =
-    useTransacoes(); // depois bora condensar isso tudo pra editar categoria, né?
+  const { adicionarTransacao, editarTransacao, removerTransacao } = useTransacoes();
 
   const { categorias } = useCategorias();
   const transacao = route.params?.transacao;
 
   const editando = !!transacao; // se não tiver vazio
 
-  const [valor, setValor] = useState(transacao?.valor ?? "");
+  const [valor, setValor] = useState(String(transacao?.valor ?? ""));
+
+  const [memo, setMemo] = useState(transacao?.memo ?? "");
   const [beneficiario, setBeneficiario] = useState(
     transacao?.beneficiario ?? "",
   );
@@ -32,6 +33,7 @@ export default function TelaEditarTransacao({ navigation, route }) {
     const transacaoFormulario = {
       id: transacao?.id ?? String(Date.now()),
       valor,
+      memo,
       beneficiario,
       id_categoria,
       data,
@@ -72,6 +74,31 @@ export default function TelaEditarTransacao({ navigation, route }) {
         </TouchableOpacity>
       </View>
 
+      <TextInput
+        style={styles.input}
+        value={valor}
+        onChangeText={setValor}
+      />
+      <TextInput
+        style={styles.input}
+        value={beneficiario}
+        onChangeText={setBeneficiario}
+      />
+      <TextInput
+        style={styles.input}
+        value={data}
+        onChangeText={setData}
+      />
+      <TextInput
+        style={styles.input}
+        value={memo}
+        onChangeText={setMemo}
+      />
+
+      <TouchableOpacity style={styles.botaoSalvar} onPress={handleSalvar}>
+        <Text style={styles.textoBotao}>{editando ? "Salvar alterações" : "Criar transacao"}</Text>
+      </TouchableOpacity>
+
       <Text style={styles.label}>Categoria</Text>
 
       {categorias.map((categoria) => (
@@ -91,6 +118,8 @@ export default function TelaEditarTransacao({ navigation, route }) {
           </Text>
         </TouchableOpacity>
       ))}
+
+
     </View>
   );
 }

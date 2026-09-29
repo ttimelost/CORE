@@ -56,11 +56,26 @@ export function TransacoesProvider({ children }) {
     });
   }, [transacoes]);
 
-  /* function editarTransacoes(escolhaTransacao) {
+  function adicionarTransacao(novaTransacao) {
     setTransacoes((transacoesAtuais) => [
+      ...transacoesAtuais,
+      novaTransacao,
+    ]);
+  }
 
-    ]) @V: TODO: fazer isso né
-  } */
+  function editarTransacao(escolhaTransacao) {
+    setTransacoes((transacoesAtuais) =>
+      transacoesAtuais.map((transacao) =>
+        transacao.id === escolhaTransacao.id ? escolhaTransacao : transacao
+      )
+    );
+  }
+
+  function removerTransacao(idRemovido) {
+    setTransacoes((transacoesAtuais) =>
+      transacoesAtuais.filter((transacao) => transacao.id !== idRemovido)
+    );
+  }
 
   return (
     <TransacoesContext.Provider
