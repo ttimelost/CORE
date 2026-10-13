@@ -22,7 +22,7 @@ export default function TelaCategorias({ navigation }) {
       <SectionList
         showsVerticalScrollIndicator={false}
         sections={sections}
-        keyExtractor={(item) => item.id}
+        keyExtractor={(item) => String(item.id)}
         style={styles.list}
         contentContainerStyle={styles.contentList}
         renderSectionHeader={({ section }) => (

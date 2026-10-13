@@ -17,40 +17,50 @@ export default function TelaEditarCategoria({ navigation, route }) {
 
   const editando = !!categoria;
 
-  const [icone, setIcone] = useState(categoria.icone ?? ""); /* tem que colocar categoria?.icone mas tipo em tudo*/
-  const [titulo, setTitulo] = useState(categoria.titulo ?? "");
-  const [rotulo, setRotulo] = useState(categoria.rotulo ?? "");
-  const [tipoAlvo, setTipoAlvo] = useState(categoria.tipoAlvo ?? ""); /* q q cacetes é tipo alvo?*/
+  const [icone, setIcone] = useState(categoria?.icone ?? "");
+  const [titulo, setTitulo] = useState(categoria?.titulo ?? "");
+  const [rotulo, setRotulo] = useState(categoria?.rotulo ?? "");
+  const [tipoAlvo, setTipoAlvo] = useState(
+    categoria?.tipoAlvo == null ? "" : String(categoria.tipoAlvo)
+  );
   const [alvo, setAlvo] = useState(
-    categoria.alvo == null ? "" : String(categoria.alvo) /* se for nulo, deixa vazio, se não deixa em string  */
+    categoria?.alvo == null ? "" : String(categoria.alvo)
   );
 
-  const handleSalvar = () => {
+  const handleSalvar = async () => {
     const categoriaFormulario = {
-      id: categoria.id ?? String(Date.now()), /* se for vazia usa o horário Re: isso é completamente idiota, mas daqui ha pouco vira sqlite ent ta dboas */
+      ...(categoria?.id == null ? {} : { id: categoria.id }),
       icone,
       titulo,
       rotulo,
-      tipoAlvo,
+      tipoAlvo: Number(tipoAlvo) || 0,
       alvo: Number(alvo) || 0,
 
-      atribuido: categoria.atribuido ?? 0, 
-      gasto: categoria.gasto ?? 0,
+      atribuido: categoria?.atribuido ?? 0,
+      gasto: categoria?.gasto ?? 0,
     };
 
-    if (editando) {
-      editarCategoria(categoriaFormulario);
-    } else {
-      adicionarCategoria(categoriaFormulario);
+    try {
+      if (editando) {
+        await editarCategoria(categoriaFormulario);
+      } else {
+        await adicionarCategoria(categoriaFormulario);
+      }
+      navigation.goBack();
+    } catch (erro) {
+      console.error("Não foi possível salvar a categoria.", erro);
     }
-    navigation.goBack();
   };
 
-  function handleRemover() {
+  async function handleRemover() {
     if (!categoria) return;
 
-    removerCategoria(categoria.id);
-    navigation.goBack();
+    try {
+      await removerCategoria(categoria.id);
+      navigation.goBack();
+    } catch (erro) {
+      console.error("Não foi possível remover a categoria.", erro);
+    }
   }
 
   return (
@@ -90,6 +100,7 @@ export default function TelaEditarCategoria({ navigation, route }) {
         style={styles.input}
         value={tipoAlvo}
         onChangeText={setTipoAlvo}
+        keyboardType="numeric"
       />
 
       <Text style={styles.label}>Alvo</Text>

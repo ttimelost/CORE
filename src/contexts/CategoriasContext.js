@@ -1,128 +1,99 @@
-import React, {
-  createContext,
-  useContext,
-  useEffect,
-  useRef,
-  useState,
-} from "react";
-import AsyncStorage from "@react-native-async-storage/async-storage";
+import React, { createContext, useContext, useEffect, useState } from "react";
+import * as CategoriaDAO from "../dao/categoriaDAO";
 import { useTransacoes } from "./TransacoesContext";
 
 const CategoriasContext = createContext();
-const CATEGORIAS_STORAGE_KEY = "categorias";
 
 const categoriasIniciais = [
   {
-    id: "1",
     icone: "🛒",
     titulo: "Necessidades",
     rotulo: "Mercado",
-    tipoAlvo: "",
+    tipoAlvo: 0,
     alvo: 200,
     atribuido: 100,
   },
   {
-    id: "2",
     icone: "⛽",
     titulo: "Necessidades",
     rotulo: "Gasolina",
-    tipoAlvo: "",
+    tipoAlvo: 0,
     alvo: 2000,
     atribuido: 9,
   },
   {
-    id: "3",
     icone: "🍿",
     titulo: "Entretenimento",
     rotulo: "Netflix",
-    tipoAlvo: "",
+    tipoAlvo: 0,
     alvo: 500,
     atribuido: 250,
   },
   {
-    id: "6",
     icone: "🍿",
     titulo: "Entretenimento",
     rotulo: "TV a cabo",
-    tipoAlvo: "",
+    tipoAlvo: 0,
     alvo: 200,
     atribuido: 200,
   },
   {
-    id: "4",
     icone: "🛠",
     titulo: "Infraestrutura",
     rotulo: "Manutenção da casa",
-    tipoAlvo: "",
+    tipoAlvo: 0,
     alvo: 2000,
     atribuido: 666,
   },
   {
-    id: "5",
     icone: "🚗",
     titulo: "Infraestrutura",
     rotulo: "Manutenção do carro",
-    tipoAlvo: "",
+    tipoAlvo: 0,
     alvo: 9000,
     atribuido: 450,
   }
 ];
 
 export function CategoriasProvider({ children }) {
-  const [categorias, setCategorias] = useState(categoriasIniciais);
-  const carregamentoConcluido = useRef(false);
-
+  const [categorias, setCategorias] = useState([]);
   const { transacoes } = useTransacoes();
 
   useEffect(() => {
-    async function carregarCategorias() {
+    async function carregar() {
       try {
-        const categoriasSalvas = await AsyncStorage.getItem(CATEGORIAS_STORAGE_KEY);
+        await CategoriaDAO.iniciarTabela();
+        let categoriasSalvas = await CategoriaDAO.listarTodos();
 
-        if (categoriasSalvas) {
-          setCategorias(JSON.parse(categoriasSalvas));
+        if (categoriasSalvas.length === 0) {
+          for (const categoria of categoriasIniciais) {
+            await CategoriaDAO.inserir(categoria);
+          }
+          categoriasSalvas = await CategoriaDAO.listarTodos();
         }
+
+        setCategorias(categoriasSalvas);
       } catch (erro) {
-        console.error("Não foi possível carregar as categorias salvas.", erro);
-      } finally {
-        carregamentoConcluido.current = true;
+        console.error("Não foi possível carregar as categorias do SQLite.", erro);
       }
     }
 
-    carregarCategorias();
+    carregar();
   }, []);
 
-  useEffect(() => {
-    if (!carregamentoConcluido.current) return;
-
-    AsyncStorage.setItem(
-      CATEGORIAS_STORAGE_KEY,
-      JSON.stringify(categorias)
-    ).catch((erro) => {
-      console.error("Não foi possível salvar as categorias.", erro);
-    });
-  }, [categorias]);
-
-  // aparentemente assim é  mais seguro
-  function adicionarCategoria(novaCategoria) {
-    setCategorias((categoriasAtuais) => [
-      ...categoriasAtuais,
-      novaCategoria,
-    ]);
+  async function adicionarCategoria(categoria) {
+    await CategoriaDAO.inserir(categoria);
+    setCategorias(await CategoriaDAO.listarTodos());
   }
 
-  function editarCategoria(escolhaCategoria) {
-    setCategorias((categoriasAtuais) =>
-      categoriasAtuais.map((categoria) =>
-        categoria.id === escolhaCategoria.id ? escolhaCategoria : categoria
-      )
-    );
+  async function editarCategoria(categoria) {
+    await CategoriaDAO.atualizar(categoria);
+    setCategorias(await CategoriaDAO.listarTodos());
   }
 
-  function removerCategoria(idRemovido) {
-    setCategorias((categoriasAtuais) =>
-      categoriasAtuais.filter((categoria) => categoria.id !== idRemovido)
-    );
+  async function removerCategoria(id) {
+    await CategoriaDAO.apagar(id);
+    setCategorias(await CategoriaDAO.listarTodos());
   }
 
   const hoje = new Date();
@@ -137,7 +108,7 @@ export function CategoriasProvider({ children }) {
           dataTransacao.getFullYear() === hoje.getFullYear();
 
         const mesmaCategoria =
-          transacao.id_categoria === categoria.id;
+          String(transacao.id_categoria) === String(categoria.id);
 
         return mesmoMes && mesmaCategoria;
       })
