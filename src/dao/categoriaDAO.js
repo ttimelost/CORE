@@ -1,34 +1,10 @@
 
-import * as SQLite from 'expo-sqlite';
-
-let dbInstance = null;
-
-// Abre a conexão com o banco de dados
-async function abrirConexao() {
-  if (!dbInstance) {
-    dbInstance = await SQLite.openDatabaseAsync('categorias.db');
-  }
-
-  return dbInstance;
-}
+import { abrirBanco } from "./sqliteConnection";
 
 // Cria a tabela de categorias
 export async function iniciarTabela() {
   try {
-    const db = await abrirConexao();
-
-    // Dinheiro é armazenado em centavos!
-    return await db.runAsync(`
-      CREATE TABLE IF NOT EXISTS categorias (
-        id INTEGER PRIMARY KEY AUTOINCREMENT,
-        rotulo TEXT NOT NULL,
-        icone TEXT NOT NULL,
-        alvo INTEGER,
-        tipoAlvo INTEGER,
-        atribuido INTEGER NOT NULL,
-        titulo TEXT NOT NULL
-      );
-    `);
+    await abrirBanco();
   } catch (error) {
     console.error('Erro ao criar tabela:', error);
     throw error;
@@ -38,7 +14,7 @@ export async function iniciarTabela() {
 // Insere uma nova categoria
 export async function inserir(categoria) {
   try {
-    const db = await abrirConexao();
+    const db = await abrirBanco();
 
     return await db.runAsync(
       `INSERT INTO categorias (
@@ -67,7 +43,7 @@ export async function inserir(categoria) {
 // Lista todas as categorias
 export async function listarTodos() {
   try {
-    const db = await abrirConexao();
+    const db = await abrirBanco();
 
     return await db.getAllAsync(
       'SELECT * FROM categorias;'
@@ -81,7 +57,7 @@ export async function listarTodos() {
 // Apaga uma categoria pelo ID
 export async function apagar(id) {
   try {
-    const db = await abrirConexao();
+    const db = await abrirBanco();
 
     return await db.runAsync(
       'DELETE FROM categorias WHERE id = ?;',
@@ -96,7 +72,7 @@ export async function apagar(id) {
 // Atualiza os dados de uma categoria
 export async function atualizar(categoria) {
   try {
-    const db = await abrirConexao();
+    const db = await abrirBanco();
 
     return await db.runAsync(
       `

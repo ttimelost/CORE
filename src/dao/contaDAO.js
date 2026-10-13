@@ -1,25 +1,8 @@
-import * as SQLite from 'expo-sqlite';
-
-let dbInstance = null;
-
-async function abrirConexao() {
-  if (!dbInstance) {
-    dbInstance = await SQLite.openDatabaseAsync('contas.db');
-  }
-  return dbInstance
-}
+import { abrirBanco } from "./sqliteConnection";
 
 export async function iniciarTabela() {
   try {
-    const db = await abrirConexao();
-    return await db.runAsync(
-      `
-      CREATE TABLE IF NOT EXISTS contas(
-      id INTEGER PRIMARY KEY AUTOINCREMENT,
-      nome TEXT NOT NULL,
-      tipo INTEGER
-      )`
-    )
+    await abrirBanco();
   } catch (error) {
     console.error("Erro DLL: ", error);
     throw error;
@@ -28,7 +11,7 @@ export async function iniciarTabela() {
 
 export async function inserir(conta) {
   try {
-    const db = await abrirConexao();
+    const db = await abrirBanco();
 
     return await db.runAsync(
       `INSERT INTO contas (
@@ -45,7 +28,7 @@ export async function inserir(conta) {
 
 export async function listarTodos() {
   try {
-    const db = await abrirConexao();
+    const db = await abrirBanco();
 
     return await db.getAllAsync(
       'SELECT * FROM contas;'
@@ -58,7 +41,7 @@ export async function listarTodos() {
 
 export async function apagar(id) {
   try {
-    const db = await abrirConexao();
+    const db = await abrirBanco();
 
     return await db.runAsync(
       'DELETE FROM contas WHERE id = ?;',
@@ -72,7 +55,7 @@ export async function apagar(id) {
 
 export async function atualizar(conta) {
   try {
-    const db = await abrirConexao();
+    const db = await abrirBanco();
 
     return await db.runAsync(
       `
