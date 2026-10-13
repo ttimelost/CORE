@@ -3,8 +3,9 @@ import { View, Text, ActivityIndicator, StyleSheet } from 'react-native';
 import NavegacaoStack from "./src/navegacao/NavegacaoStack"
 import { NavigationContainer } from '@react-navigation/native';
 import { CategoriasProvider } from './src/contexts/CategoriasContext';
-import {EducacaoProvider} from './src/contexts/EducacaoContext'
+import { EducacaoProvider } from './src/contexts/EducacaoContext'
 import { TransacoesProvider } from './src/contexts/TransacoesContext';
+import { ContasProvider } from './src/contexts/ContasContext';
 
 const NavegadorAtual = NavegacaoStack
 
@@ -25,15 +26,17 @@ export default function App() {
       </View>
     );
   }
-  
+
   return (
     <NavigationContainer>
       <TransacoesProvider>
-        <CategoriasProvider>
-          <EducacaoProvider>
-            <NavegacaoStack />
-          </EducacaoProvider>
-        </CategoriasProvider>
+        <ContasProvider>
+          <CategoriasProvider>
+            <EducacaoProvider>
+              <NavegacaoStack />
+            </EducacaoProvider>
+          </CategoriasProvider>
+        </ContasProvider>
       </TransacoesProvider>
     </NavigationContainer>
   );

@@ -1,6 +1,7 @@
 import React, { createContext, useContext, useEffect, useState } from "react";
 import * as CategoriaDAO from "../dao/categoriaDAO";
 import { useTransacoes } from "./TransacoesContext";
+import { mesmoMes } from "../utils/mesmoMes";
 
 const CategoriasContext = createContext();
 
@@ -101,16 +102,10 @@ export function CategoriasProvider({ children }) {
   const categoriasComGasto = categorias.map((categoria) => {
     const gasto = transacoes
       .filter((transacao) => {
-        const dataTransacao = new Date(transacao.data);
-
-        const mesmoMes =
-          dataTransacao.getMonth() === hoje.getMonth() &&
-          dataTransacao.getFullYear() === hoje.getFullYear();
-
         const mesmaCategoria =
           String(transacao.id_categoria) === String(categoria.id);
 
-        return mesmoMes && mesmaCategoria;
+        return mesmaCategoria && mesmoMes(transacao.data, hoje);
       })
       .reduce((total, transacao) => {
         return total + Number(transacao.valor);

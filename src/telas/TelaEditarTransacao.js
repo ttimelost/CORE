@@ -9,11 +9,13 @@ import {
 
 import { useTransacoes } from "../contexts/TransacoesContext";
 import { useCategorias } from "../contexts/CategoriasContext";
+import { useContas } from "../contexts/ContasContext";
 
 export default function TelaEditarTransacao({ navigation, route }) {
   const { adicionarTransacao, editarTransacao, removerTransacao } = useTransacoes();
 
   const { categorias } = useCategorias();
+  const { contas } = useContas();
   const transacao = route.params?.transacao;
 
   const editando = !!transacao; // se não tiver vazio
@@ -27,6 +29,7 @@ export default function TelaEditarTransacao({ navigation, route }) {
   const [id_categoria, setId_categoria] = useState(
     transacao?.id_categoria ?? "",
   );
+  const [id_conta, setId_conta] = useState(transacao?.id_conta ?? "");
   const [data, setData] = useState(transacao?.data ?? "");
 
   const handleSalvar = () => {
@@ -36,6 +39,7 @@ export default function TelaEditarTransacao({ navigation, route }) {
       memo,
       beneficiario,
       id_categoria,
+      id_conta,
       data,
     };
 
@@ -126,6 +130,22 @@ export default function TelaEditarTransacao({ navigation, route }) {
         </TouchableOpacity>
       ))}
 
+      <Text style={styles.label}>Conta</Text>
+      {contas.map((conta) => (
+        <TouchableOpacity
+          key={conta.id}
+          onPress={() => setId_conta(conta.id)}
+          style={{
+            padding: 12,
+            marginBottom: 6,
+            borderRadius: 8,
+            backgroundColor:
+              String(id_conta) === String(conta.id) ? "#356859" : "#28292e",
+          }}
+        >
+          <Text style={{ color: "#fff" }}>{conta.nome}</Text>
+        </TouchableOpacity>
+      ))}
 
     </View>
   );
