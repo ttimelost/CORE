@@ -78,25 +78,32 @@ export default function TelaEditarTransacao({ navigation, route }) {
         style={styles.input}
         value={valor}
         onChangeText={setValor}
+        placeholder="Valor"
       />
       <TextInput
         style={styles.input}
         value={beneficiario}
         onChangeText={setBeneficiario}
+        placeholder="Beneficiário"
       />
       <TextInput
         style={styles.input}
         value={data}
         onChangeText={setData}
+        placeholder="Dia"
       />
       <TextInput
         style={styles.input}
         value={memo}
         onChangeText={setMemo}
+        placeholder="MEMO"
       />
 
       <TouchableOpacity style={styles.botaoSalvar} onPress={handleSalvar}>
         <Text style={styles.textoBotao}>{editando ? "Salvar alterações" : "Criar transacao"}</Text>
+      </TouchableOpacity>
+      <TouchableOpacity style={styles.botaoApagar} onPress={handleRemover}>
+        <Text style={styles.textoBotao}>Apabar</Text>
       </TouchableOpacity>
 
       <Text style={styles.label}>Categoria</Text>

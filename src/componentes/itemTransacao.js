@@ -8,11 +8,11 @@ export default function ItemTransacao({ transacao, navigation }) {
         onPress={() => navigation.navigate("EditarTransacao", { transacao })}
       >
         <View style={styles.cardContainer}>
-          <Text>{transacao.valor}</Text>
-          <Text>{transacao.id_categoria}</Text>
-          <Text>{transacao.beneficiario}</Text>
-          <Text>{transacao.memo}</Text>
-          <Text>{transacao.data}</Text>
+          <Text style={styles.cardTitle}>{transacao.valor}</Text>
+          <Text style={styles.cardBody}>{transacao.id_categoria}</Text>
+          <Text style={styles.cardBody}>{transacao.beneficiario}</Text>
+          <Text style={styles.cardBody}>{transacao.memo}</Text>
+          <Text style={styles.cardBody}>{transacao.data}</Text>
         </View>
       </TouchableOpacity>
     </View>

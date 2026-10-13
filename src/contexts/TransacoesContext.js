@@ -81,7 +81,9 @@ export function TransacoesProvider({ children }) {
     <TransacoesContext.Provider
       value={{
         transacoes,
-        //editar
+        adicionarTransacao,
+        editarTransacao,
+        removerTransacao,
       }}
     >
       {children}
