@@ -1,20 +1,11 @@
-import React, {
-  createContext,
-  useContext,
-  useEffect,
-  useState,
-} from "react";
-import * as CategoriaDAO from '../dao/categoriaDAO'
-import { useTransacoes } from './TransacoesContext'
-
+import React, { createContext, useContext, useEffect, useState } from "react";
+import * as CategoriaDAO from "../dao/categoriaDAO";
+import { useTransacoes } from "./TransacoesContext";
 
 const CategoriasContext = createContext();
 
-
-
 const categoriasIniciais = [
   {
-    id: 1,
     icone: "🛒",
     titulo: "Necessidades",
     rotulo: "Mercado",
@@ -23,7 +14,6 @@ const categoriasIniciais = [
     atribuido: 100,
   },
   {
-    id: 2,
     icone: "⛽",
     titulo: "Necessidades",
     rotulo: "Gasolina",
@@ -32,7 +22,6 @@ const categoriasIniciais = [
     atribuido: 9,
   },
   {
-    id: 3,
     icone: "🍿",
     titulo: "Entretenimento",
     rotulo: "Netflix",
@@ -41,7 +30,6 @@ const categoriasIniciais = [
     atribuido: 250,
   },
   {
-    id: 6,
     icone: "🍿",
     titulo: "Entretenimento",
     rotulo: "TV a cabo",
@@ -50,7 +38,6 @@ const categoriasIniciais = [
     atribuido: 200,
   },
   {
-    id: 4,
     icone: "🛠",
     titulo: "Infraestrutura",
     rotulo: "Manutenção da casa",
@@ -59,7 +46,6 @@ const categoriasIniciais = [
     atribuido: 666,
   },
   {
-    id: 5,
     icone: "🚗",
     titulo: "Infraestrutura",
     rotulo: "Manutenção do carro",
@@ -77,7 +63,15 @@ export function CategoriasProvider({ children }) {
     async function carregar() {
       try {
         await CategoriaDAO.iniciarTabela();
-        const categoriasSalvas = await CategoriaDAO.listarTodos();
+        let categoriasSalvas = await CategoriaDAO.listarTodos();
+
+        if (categoriasSalvas.length === 0) {
+          for (const categoria of categoriasIniciais) {
+            await CategoriaDAO.inserir(categoria);
+          }
+          categoriasSalvas = await CategoriaDAO.listarTodos();
+        }
+
         setCategorias(categoriasSalvas);
       } catch (erro) {
         console.error("Não foi possível carregar as categorias do SQLite.", erro);
@@ -85,7 +79,7 @@ export function CategoriasProvider({ children }) {
     }
 
     carregar();
-  }, [])
+  }, []);
 
   async function adicionarCategoria(categoria) {
     await CategoriaDAO.inserir(categoria);

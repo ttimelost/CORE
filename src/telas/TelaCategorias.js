@@ -1,42 +1,11 @@
-import React, { useEffect, useState } from "react";
+import React from "react";
 import { Text, View, StyleSheet, SectionList } from "react-native";
 import ComponenteCategoria from "../componentes/componenteCategoria";
 import ComponenteSuperCategoria from "../componentes/componenteSuperCategoria";
-import * as CategoriaDAO from '../dao/categoriaDAO'
+import { useCategorias } from "../contexts/CategoriasContext";
 
 export default function TelaCategorias({ navigation }) {
-  const { categorias, setCategorias } = useState([]);
-  const { nome, setNome } = useState('')
-  const { nome_super_categoria, setNome_super_categoria } = useState('')
-  const { alvo, setAlvo } = useState(null)
-  const { atribuido, setAtribuido } = useState(null)
-
-  useEffect(() => {
-    async function setup() {
-      try {
-        await CategoriaDAO.iniciarTabela();
-        await carregarCategorias();
-      } catch (error) {
-        console.error("Erro ao inicializar o app: ", error);
-      }
-    }
-    setup();
-  }, []);
-
-  async function carregarCategorias() {
-    try {
-      const dados = await CategoriaDAO.listarTodos();
-
-      const dadosFormatados = dados.map(function (item) {
-        return {
-          ...item // sei lá vai que precisa dps ne
-        };
-      });
-      setCategorias(dadosFormatados);
-    } catch (error) {
-      console.error("Erro ao carregar dados: ", error);
-    }
-  }
+  const { categorias } = useCategorias();
 
   const sections = Array.from(new Set(categorias.map((item) => item.titulo))).map(
     (titulo) => ({
@@ -53,7 +22,7 @@ export default function TelaCategorias({ navigation }) {
       <SectionList
         showsVerticalScrollIndicator={false}
         sections={sections}
-        keyExtractor={(item) => item.id}
+        keyExtractor={(item) => String(item.id)}
         style={styles.list}
         contentContainerStyle={styles.contentList}
         renderSectionHeader={({ section }) => (
