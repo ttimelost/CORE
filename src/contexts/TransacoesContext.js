@@ -16,8 +16,8 @@ const transacoesIniciais = [
     valor: "67.12",
     beneficiario: "loja de pão",
     id_categoria: "1",
-    data: "2026-09-27",
-    memo: "Comprei pão né porra",
+    data: "2026-10-18",
+    memo: "Comprei pão",
   },
 ];
 

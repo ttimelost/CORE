@@ -53,5 +53,7 @@ async function inicializarBanco(database) {
       atribuido INTEGER NOT NULL,
       titulo TEXT NOT NULL
     );
+
+    
   `);
 }

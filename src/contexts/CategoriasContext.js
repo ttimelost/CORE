@@ -104,12 +104,13 @@ export function CategoriasProvider({ children }) {
       .filter((transacao) => {
         const mesmaCategoria =
           String(transacao.id_categoria) === String(categoria.id);
-
         return mesmaCategoria && mesmoMes(transacao.data, hoje);
       })
       .reduce((total, transacao) => {
         return total + Number(transacao.valor);
       }, 0);
+
+
 
     return {
       ...categoria,

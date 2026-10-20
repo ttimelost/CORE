@@ -1,5 +1,11 @@
 import React from "react";
-import { Text, View, StyleSheet, SectionList } from "react-native";
+import {
+  Text,
+  View,
+  StyleSheet,
+  SectionList,
+  TouchableOpacity,
+} from "react-native";
 import ComponenteCategoria from "../componentes/componenteCategoria";
 import ComponenteSuperCategoria from "../componentes/componenteSuperCategoria";
 import { useCategorias } from "../contexts/CategoriasContext";
@@ -19,6 +25,14 @@ export default function TelaCategorias({ navigation }) {
       <View style={{ alignItems: "left" }}>
         <Text style={styles.titulo}>Temporario</Text>
       </View>
+
+      <TouchableOpacity
+        style={styles.botaoAdicionar}
+        onPress={() => navigation.navigate("EditarCategoria")}
+      >
+        <Text style={styles.textoBotaoAdicionar}>Adicionar</Text>
+      </TouchableOpacity>
+
       <SectionList
         showsVerticalScrollIndicator={false}
         sections={sections}
@@ -56,6 +70,18 @@ const styles = StyleSheet.create({
     fontSize: 36,
     color: "#fff",
     margin: 48,
+  },
+  botaoAdicionar: {
+    backgroundColor: "#356859",
+    minHeight: 44,
+    justifyContent: "center",
+    paddingHorizontal: 16,
+    borderRadius: 8,
+  },
+  textoBotaoAdicionar: {
+    color: "#fff",
+    fontSize: 16,
+    fontWeight: "bold",
   },
   list: {
     width: "90%",
