@@ -26,7 +26,7 @@ export default function TelaBemVindo1({ navigation }) {
                 <View style={styles.card}>
                     <Text style={styles.titulo}> Bem vindo ao CORE </Text>
 
-                    <Text style={styles.descricao}> Lorem ipsum dolor sit amet Lorem ipsum dolor sit amet Lorem ipsum dolor sit amet Lorem ipsum dolor sit amet</Text>
+                    <Text style={styles.descricao}> bem bidno ouv projeto binfal</Text>
                 </View>
 
                 <TouchableOpacity style={styles.botao} onPress={() => navigation.navigate('Registro')}>

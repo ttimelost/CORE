@@ -11,14 +11,20 @@ export function abrirBanco() {
       const database = await SQLite.openDatabaseAsync(DATABASE_NAME);
 
       try {
+        await database.execAsync("PRAGMA foreign_keys = ON;"); // pra references precisa disso
         await inicializarBanco(database);
+
         return database;
       } catch (error) {
         try {
           await database.closeAsync();
         } catch (closeError) {
-          console.error("Não foi possível fechar o SQLite após falha na inicialização.", closeError);
+          console.error(
+            "Não foi possível fechar o SQLite após falha na inicialização.",
+            closeError
+          );
         }
+
         throw error;
       }
     });
@@ -27,9 +33,10 @@ export function abrirBanco() {
       databasePromise = null;
       throw error;
     });
+
     databaseOpening = databasePromise.then(
       () => undefined,
-      () => undefined,
+      () => undefined
     );
   }
 
@@ -54,6 +61,14 @@ async function inicializarBanco(database) {
       titulo TEXT NOT NULL
     );
 
-    
+    CREATE TABLE IF NOT EXISTS transacoes (
+      id INTEGER PRIMARY KEY AUTOINCREMENT,
+      valor INTEGER NOT NULL,
+      beneficiario TEXT NOT NULL,
+      id_categoria INTEGER NOT NULL REFERENCES categorias(id),
+      id_conta INTEGER NOT NULL REFERENCES contas(id),
+      data TEXT NOT NULL,
+      memo TEXT
+    );
   `);
 }
