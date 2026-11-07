@@ -1,4 +1,3 @@
-
 import { abrirBanco } from "./sqliteConnection";
 
 // Cria a tabela de categorias

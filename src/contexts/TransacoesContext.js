@@ -1,14 +1,6 @@
-import React, {
-  createContext,
-  useContext,
-  useEffect,
-  useRef,
-  useState,
-} from "react";
-import AsyncStorage from "@react-native-async-storage/async-storage";
-
+import React, { createContext, useContext, useEffect, useState } from "react";
+import * as TransacaoDAO from "../dao/transacao";
 const TransacoesContext = createContext();
-const TRANSACOES_STORAGE_KEY = "transacoes";
 
 const transacoesIniciais = [
   {
@@ -16,79 +8,63 @@ const transacoesIniciais = [
     valor: "67.12",
     beneficiario: "loja de pão",
     id_categoria: "1",
-    data: "2026-10-18",
+    id_conta: "1",
+    data: "2026-11-02",
     memo: "Comprei pão",
   },
 ];
 
 export function TransacoesProvider({ children }) {
-  const [transacoes, setTransacoes] = useState(transacoesIniciais);
-  const carregamentoConcluido = useRef(false);
-
+  const [transacoes, setTransacoes] = useState([]);
   useEffect(() => {
-    async function carregarTransacoes() {
+    async function carregar() {
       try {
-        const transacoesSalvas = await AsyncStorage.getItem(
-          TRANSACOES_STORAGE_KEY,
-        );
+        await TransacaoDAO.iniciarTabela();
+        let transacoesSalvas = await TransacaoDAO.listarTodos();
 
-        if (transacoesSalvas) {
-          setTransacoes(JSON.parse(transacoesSalvas));
+        if (transacoesSalvas.length === 0) {
+          for (const transacao of transacoesIniciais) {
+            await TransacaoDAO.inserir(transacao);
+          }
+          transacoesSalvas = await TransacaoDAO.listarTodos();
         }
+
+        setTransacoes(transacoesSalvas);
       } catch (erro) {
-        console.error("Deu bosta na hora de carregar trnsações: ", erro);
-      } finally {
-        carregamentoConcluido.current = true;
+        console.error("Não foi possível carregar as transacoes do SQLite.", erro);
       }
     }
+    carregar();
+  }, [])
 
-    carregarTransacoes();
-  }, []); //@V: pra que caralhos que serve essa lista vazia
-
-  useEffect(() => {
-    if (!carregamentoConcluido.current) return; //@v por que tem asyn loading e os caraio se a gente ta esperando carregar os caraio?
-
-    AsyncStorage.setItem(
-      TRANSACOES_STORAGE_KEY,
-      JSON.stringify(transacoes),
-    ).catch((erro) => {
-      console.error("Deu rim em salvar categoira ", erro);
-    });
-  }, [transacoes]);
-
-  function adicionarTransacao(novaTransacao) {
-    setTransacoes((transacoesAtuais) => [
-      ...transacoesAtuais,
-      novaTransacao,
-    ]);
+  async function adicionarTransacao(transacao) {
+    await TransacaoDAO.inserir(transacao);
+    setTransacoes(await TransacaoDAO.listarTodos());
   }
 
-  function editarTransacao(escolhaTransacao) {
-    setTransacoes((transacoesAtuais) =>
-      transacoesAtuais.map((transacao) =>
-        transacao.id === escolhaTransacao.id ? escolhaTransacao : transacao
-      )
-    );
+  async function editarTransacao(transacao) {
+    await TransacaoDAO.atualizar(transacao);
+    setTransacoes(await TransacaoDAO.listarTodos());
   }
 
-  function removerTransacao(idRemovido) {
-    setTransacoes((transacoesAtuais) =>
-      transacoesAtuais.filter((transacao) => transacao.id !== idRemovido)
-    );
+  async function removerTransacao(id) {
+    await TransacaoDAO.apagar(id);
+    setTransacoes(await TransacaoDAO.listarTodos());
   }
 
   return (
     <TransacoesContext.Provider
       value={{
-        transacoes,
+        transacoes: transacoes,
         adicionarTransacao,
         editarTransacao,
-        removerTransacao,
+        removerTransacao
       }}
     >
       {children}
     </TransacoesContext.Provider>
   );
+
 }
 
 export function useTransacoes() {
