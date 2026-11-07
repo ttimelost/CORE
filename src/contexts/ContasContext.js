@@ -1,5 +1,5 @@
 import React, { createContext, useContext, useEffect, useState } from "react";
-import * as ContaDAO from "../dao/contaDAO";
+import * as ContaDAO from "../dao/conta";
 import { useTransacoes } from "./TransacoesContext";
 import { mesmoMes } from "../utils/mesmoMes";
 

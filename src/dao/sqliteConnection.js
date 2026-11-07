@@ -70,5 +70,12 @@ async function inicializarBanco(database) {
       data TEXT NOT NULL,
       memo TEXT
     );
+
+    CREATE TABLE IF NOT EXISTS atribuicoes (
+    id INTEGER PRIMARY KEY AUTOINCREMENT,
+    valor INTEGER NOT NULL,
+    mes INTEGER NOT NULL
+    )
+
   `);
 }

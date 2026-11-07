@@ -118,6 +118,7 @@ export function CategoriasProvider({ children }) {
     };
   });
 
+
   return (
     <CategoriasContext.Provider
       value={{
