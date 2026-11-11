@@ -4,6 +4,7 @@ import {
   TextInput,
   StyleSheet,
   TouchableOpacity,
+  ScrollView,
   View,
 } from "react-native";
 
@@ -59,7 +60,10 @@ export default function TelaEditarTransacao({ navigation, route }) {
   }
 
   return (
-    <View style={styles.container}>
+    <ScrollView
+      style={{ flex: 1 }}
+      contentContainerStyle={styles.container}
+    >
       <View
         style={{
           flexDirection: "row",
@@ -78,29 +82,29 @@ export default function TelaEditarTransacao({ navigation, route }) {
         </TouchableOpacity>
       </View>
 
+      <Text style={styles.label}>Valor</Text>
       <TextInput
         style={styles.input}
         value={valor}
         onChangeText={setValor}
-        placeholder="Valor"
       />
+      <Text style={styles.label}>Beneficiário</Text>
       <TextInput
         style={styles.input}
         value={beneficiario}
         onChangeText={setBeneficiario}
-        placeholder="Beneficiário"
       />
+      <Text style={styles.label}>Dia</Text>
       <TextInput
         style={styles.input}
         value={data}
         onChangeText={setData}
-        placeholder="Dia"
       />
+      <Text style={styles.label}>MEMO</Text>
       <TextInput
         style={styles.input}
         value={memo}
         onChangeText={setMemo}
-        placeholder="MEMO"
       />
 
       <TouchableOpacity style={styles.botaoSalvar} onPress={handleSalvar}>
@@ -147,13 +151,13 @@ export default function TelaEditarTransacao({ navigation, route }) {
         </TouchableOpacity>
       ))}
 
-    </View>
+    </ScrollView>
   );
 }
 
 const styles = StyleSheet.create({
   container: {
-    flex: 1,
+    flexGrow: 1,
     backgroundColor: "#121315",
     padding: 20,
   },
@@ -169,10 +173,36 @@ const styles = StyleSheet.create({
     padding: 10,
     borderRadius: 8,
   },
+  input: {
+    backgroundColor: "#28292e",
+    color: "#fff",
+    borderRadius: 8,
+    padding: 12,
+    fontSize: 16,
+    marginBottom: 10,
+  },
   label: {
     color: "#fff",
     fontSize: 14,
     marginTop: 12,
     marginBottom: 5,
+  },
+  botaoSalvar: {
+    backgroundColor: "green",
+    padding: 14,
+    borderRadius: 8,
+    marginTop: 20,
+    alignItems: "center",
+  },
+  botaoApagar: {
+    backgroundColor: "red",
+    padding: 14,
+    borderRadius: 8,
+    marginTop: 20,
+    alignItems: "center",
+  },
+  textoBotao: {
+    color: "#fff",
+    fontWeight: "bold",
   },
 });
