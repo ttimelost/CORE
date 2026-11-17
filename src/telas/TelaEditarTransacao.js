@@ -222,7 +222,6 @@ const styles = StyleSheet.create({
     marginTop: 12,
     marginBottom: 5,
   },
-<<<<<<< HEAD
   input: {
     backgroundColor: "#fff",
   },
@@ -230,24 +229,4 @@ const styles = StyleSheet.create({
     color: "#ff6b6b",
     marginTop: 8,
   }
-=======
-  botaoSalvar: {
-    backgroundColor: "green",
-    padding: 14,
-    borderRadius: 8,
-    marginTop: 20,
-    alignItems: "center",
-  },
-  botaoApagar: {
-    backgroundColor: "red",
-    padding: 14,
-    borderRadius: 8,
-    marginTop: 20,
-    alignItems: "center",
-  },
-  textoBotao: {
-    color: "#fff",
-    fontWeight: "bold",
-  },
->>>>>>> 48e105ede504b64a17d8c9aced5d41c4d8e0ef66
 });
