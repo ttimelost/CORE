@@ -32,3 +32,16 @@ export function somarTransacoesDoMes(transacoes, campoId, id, referencia) {
     )
     .reduce((total, transacao) => total + Number(transacao.valor || 0), 0);
 }
+
+export function somarGastosDoMes(transacoes, campoId, id, referencia) {
+  return transacoes
+    .filter(
+      (transacao) =>
+        String(transacao[campoId]) === String(id) &&
+        mesmoMes(transacao.data, referencia)
+    )
+    .reduce(
+      (total, transacao) => total + Math.abs(Number(transacao.valor || 0)),
+      0
+    );
+}

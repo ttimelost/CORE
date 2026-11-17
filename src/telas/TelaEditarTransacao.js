@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { createElement, useState } from "react";
 import {
   Alert,
   Platform,
@@ -58,6 +58,8 @@ export default function TelaEditarTransacao({ navigation, route }) {
   );
   const [seletorVisivel, setSeletorVisivel] = useState(false);
   const [erro, setErro] = useState("");
+
+  const dataSelecionada = converterParaData(data);
 
   function handleAlterarData(evento, novaData) {
     if (evento.type !== "dismissed" && novaData) {
@@ -164,28 +166,28 @@ export default function TelaEditarTransacao({ navigation, route }) {
         onChangeText={setBeneficiario}
       />
       <Text style={styles.label}>Data</Text>
-      {Platform.OS === "web" ? (
-        <TextInput
-          style={styles.botaoData}
-          value={data}
-          onChangeText={setData}
-          type="date"
-          accessibilityLabel="Data da transação"
-        />
-      ) : (
-        <TouchableOpacity
-          style={styles.botaoData}
-          onPress={handleAbrirSeletorData}
-          accessibilityRole="button"
-          accessibilityLabel={`Selecionar data, atual ${converterParaData(data).toLocaleDateString("pt-BR")}`}
-        >
-          <Text style={styles.iconeData}>▦</Text>
-          <Text style={styles.textoData}>
-            {converterParaData(data).toLocaleDateString("pt-BR")}
-          </Text>
-          <Text style={styles.dicaData}>Selecionar</Text>
-        </TouchableOpacity>
-      )}
+      {Platform.OS === "web"
+        ? createElement("input", {
+            type: "date",
+            value: data,
+            onChange: (evento) => setData(evento.target.value),
+            "aria-label": "Data da transação",
+            style: styles.campoDataWeb,
+          })
+        : (
+          <TouchableOpacity
+            style={styles.botaoData}
+            onPress={handleAbrirSeletorData}
+            accessibilityRole="button"
+            accessibilityLabel={`Selecionar data, atual ${dataSelecionada.toLocaleDateString("pt-BR")}`}
+          >
+            <Text style={styles.iconeData}>▦</Text>
+            <Text style={styles.textoData}>
+              {dataSelecionada.toLocaleDateString("pt-BR")}
+            </Text>
+            <Text style={styles.dicaData}>Selecionar</Text>
+          </TouchableOpacity>
+        )}
       {Platform.OS === "ios" && seletorVisivel ? (
         <View style={styles.seletorData}>
           <DateTimePicker
@@ -312,6 +314,18 @@ const styles = StyleSheet.create({
     marginBottom: 10,
     fontSize: 16,
   },
+  campoDataWeb: {
+    boxSizing: "border-box",
+    width: "100%",
+    backgroundColor: "#28292e",
+    color: "#fff",
+    borderWidth: 0,
+    borderRadius: 8,
+    padding: 14,
+    marginBottom: 10,
+    fontSize: 16,
+    colorScheme: "dark",
+  },
   iconeData: {
     color: "#8ed1b4",
     fontSize: 20,
@@ -325,13 +339,6 @@ const styles = StyleSheet.create({
   dicaData: {
     color: "#8ed1b4",
     fontSize: 14,
-  },
-  seletorData: {
-    backgroundColor: "#28292e",
-    borderRadius: 12,
-    overflow: "hidden",
-    marginBottom: 12,
-    padding: 8,
   },
   botaoConcluirData: {
     alignItems: "center",

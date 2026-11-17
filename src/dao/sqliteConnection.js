@@ -73,11 +73,13 @@ async function inicializarBanco(database) {
       memo TEXT
     );
 
-    CREATE TABLE IF NOT EXISTS atribuicoes (
-    id INTEGER PRIMARY KEY AUTOINCREMENT,
-    valor INTEGER NOT NULL,
-    mes INTEGER NOT NULL
-    )
+    CREATE TABLE atribuicoes (
+  id INTEGER PRIMARY KEY AUTOINCREMENT,
+  id_categoria INTEGER NOT NULL,
+  mes TEXT NOT NOT NULL,
+  valor INTEGER NOT NOT NULL,
+  FOREIGN KEY (id_categoria) REFERENCES categorias(id) ON DELETE CASCADE
+);
 
   `);
 

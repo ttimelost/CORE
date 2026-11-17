@@ -1,7 +1,7 @@
 import React, { createContext, useContext } from "react";
 import * as CategoriaDAO from "../dao/categoria";
 import { useTransacoes } from "./TransacoesContext";
-import { somarTransacoesDoMes } from "../utils/mesmoMes";
+import { somarGastosDoMes } from "../utils/mesmoMes";
 import { useColecaoDAO } from "./useColecaoDAO";
 
 const CategoriasContext = createContext();
@@ -19,7 +19,7 @@ export function CategoriasProvider({ children }) {
 
 
   const categoriasComGasto = categorias.map((categoria) => {
-    const gasto = somarTransacoesDoMes(
+    const gasto = somarGastosDoMes(
       transacoes,
       "id_categoria",
       categoria.id,
