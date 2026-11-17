@@ -1,4 +1,4 @@
-import { memo, useState } from "react";
+import { useState } from "react";
 import {
   Alert,
   Text,
@@ -73,7 +73,7 @@ export default function TelaEditarTransacao({ navigation, route }) {
     }
   };
 
-  async function handleRemover() {
+  async function handleRemover() { // precisa ou refatorar isso ou colocar essa linha debaixo em outro lugar, porque o nome da funcao nao ta descritivo
     if (!transacao) return;
 
     try {
