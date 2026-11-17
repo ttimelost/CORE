@@ -1,6 +1,7 @@
 import { useState } from "react";
 import {
   Alert,
+  Platform,
   Text,
   TextInput,
   StyleSheet,
@@ -8,10 +9,30 @@ import {
   ScrollView,
   View,
 } from "react-native";
+import DateTimePicker, {
+  DateTimePickerAndroid,
+} from "@react-native-community/datetimepicker";
 
 import { useTransacoes } from "../contexts/TransacoesContext";
 import { useCategorias } from "../contexts/CategoriasContext";
 import { useContas } from "../contexts/ContasContext";
+
+function formatarData(data) {
+  const ano = data.getFullYear();
+  const mes = String(data.getMonth() + 1).padStart(2, "0");
+  const dia = String(data.getDate()).padStart(2, "0");
+  return `${ano}-${mes}-${dia}`;
+}
+
+function converterParaData(valor) {
+  if (typeof valor === "string" && /^\d{4}-\d{2}-\d{2}/.test(valor)) {
+    const [ano, mes, dia] = valor.slice(0, 10).split("-").map(Number);
+    return new Date(ano, mes - 1, dia);
+  }
+
+  const data = valor ? new Date(valor) : new Date();
+  return Number.isNaN(data.getTime()) ? new Date() : data;
+}
 
 export default function TelaEditarTransacao({ navigation, route }) {
   const { adicionarTransacao, editarTransacao, removerTransacao } = useTransacoes();
@@ -32,8 +53,30 @@ export default function TelaEditarTransacao({ navigation, route }) {
     transacao?.id_categoria ?? "",
   );
   const [id_conta, setId_conta] = useState(transacao?.id_conta ?? "");
-  const [data, setData] = useState(transacao?.data ?? "");
+  const [data, setData] = useState(() =>
+    formatarData(converterParaData(transacao?.data)),
+  );
+  const [seletorVisivel, setSeletorVisivel] = useState(false);
   const [erro, setErro] = useState("");
+
+  function handleAlterarData(evento, novaData) {
+    if (evento.type !== "dismissed" && novaData) {
+      setData(formatarData(novaData));
+    }
+  }
+
+  function handleAbrirSeletorData() {
+    if (Platform.OS === "android") {
+      DateTimePickerAndroid.open({
+        value: converterParaData(data),
+        mode: "date",
+        onChange: handleAlterarData,
+      });
+      return;
+    }
+
+    setSeletorVisivel((visivel) => !visivel);
+  }
 
   function validar() {
     if (!id_categoria || !id_conta) {
@@ -120,12 +163,46 @@ export default function TelaEditarTransacao({ navigation, route }) {
         value={beneficiario}
         onChangeText={setBeneficiario}
       />
-      <Text style={styles.label}>Dia</Text>
-      <TextInput
-        style={styles.input}
-        value={data}
-        onChangeText={setData}
-      />
+      <Text style={styles.label}>Data</Text>
+      {Platform.OS === "web" ? (
+        <TextInput
+          style={styles.botaoData}
+          value={data}
+          onChangeText={setData}
+          type="date"
+          accessibilityLabel="Data da transação"
+        />
+      ) : (
+        <TouchableOpacity
+          style={styles.botaoData}
+          onPress={handleAbrirSeletorData}
+          accessibilityRole="button"
+          accessibilityLabel={`Selecionar data, atual ${converterParaData(data).toLocaleDateString("pt-BR")}`}
+        >
+          <Text style={styles.iconeData}>▦</Text>
+          <Text style={styles.textoData}>
+            {converterParaData(data).toLocaleDateString("pt-BR")}
+          </Text>
+          <Text style={styles.dicaData}>Selecionar</Text>
+        </TouchableOpacity>
+      )}
+      {Platform.OS === "ios" && seletorVisivel ? (
+        <View style={styles.seletorData}>
+          <DateTimePicker
+            value={converterParaData(data)}
+            mode="date"
+            display="inline"
+            onChange={handleAlterarData}
+            themeVariant="dark"
+          />
+          <TouchableOpacity
+            style={styles.botaoConcluirData}
+            onPress={() => setSeletorVisivel(false)}
+          >
+            <Text style={styles.textoConcluirData}>Concluir</Text>
+          </TouchableOpacity>
+        </View>
+      ) : null}
       <Text style={styles.label}>MEMO</Text>
       <TextInput
         style={styles.input}
@@ -224,6 +301,46 @@ const styles = StyleSheet.create({
   },
   input: {
     backgroundColor: "#fff",
+  },
+  botaoData: {
+    flexDirection: "row",
+    alignItems: "center",
+    backgroundColor: "#28292e",
+    color: "#fff",
+    borderRadius: 8,
+    padding: 14,
+    marginBottom: 10,
+    fontSize: 16,
+  },
+  iconeData: {
+    color: "#8ed1b4",
+    fontSize: 20,
+    marginRight: 12,
+  },
+  textoData: {
+    color: "#fff",
+    fontSize: 16,
+    flex: 1,
+  },
+  dicaData: {
+    color: "#8ed1b4",
+    fontSize: 14,
+  },
+  seletorData: {
+    backgroundColor: "#28292e",
+    borderRadius: 12,
+    overflow: "hidden",
+    marginBottom: 12,
+    padding: 8,
+  },
+  botaoConcluirData: {
+    alignItems: "center",
+    padding: 10,
+  },
+  textoConcluirData: {
+    color: "#8ed1b4",
+    fontSize: 16,
+    fontWeight: "600",
   },
   erro: {
     color: "#ff6b6b",

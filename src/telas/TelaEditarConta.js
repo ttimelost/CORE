@@ -117,6 +117,6 @@ const styles = StyleSheet.create({
   },
   entrada: {
     backgroundColor: "#fff",
-    color: "#F0F"
+    color: "#f-0f"
   }
 });
