@@ -15,15 +15,16 @@ export function TransacoesProvider({ children }) {
   return (
     <TransacoesContext.Provider
       value={{
-        transacoes,
+        transacoes: transacoes,
         adicionarTransacao,
         editarTransacao,
-        removerTransacao,
+        removerTransacao
       }}
     >
       {children}
     </TransacoesContext.Provider>
   );
+
 }
 
 export function useTransacoes() {
