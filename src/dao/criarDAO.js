@@ -1,6 +1,6 @@
 import { abrirBanco } from "./sqliteConnection"
 
-export function creationDAO(tabela, campos) {
+export function criarDao(tabela, campos) {
   return {
     async iniciarTabela() {
       await abrirBanco();

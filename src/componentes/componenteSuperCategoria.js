@@ -1,10 +1,10 @@
 import React from "react";
 import { View, Text, StyleSheet } from "react-native";
 
-export default function ComponenteSuperCategoria({ rotulo, navigation }) {
+export default function ComponenteSuperCategoria({ grupo, navigation }) {
   return (
     <View>
-      <Text style={styles.titulo}>{rotulo}</Text>
+      <Text style={styles.titulo}>{grupo}</Text>
     </View>
   );
 }

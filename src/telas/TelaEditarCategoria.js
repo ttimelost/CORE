@@ -18,8 +18,8 @@ export default function TelaEditarCategoria({ navigation, route }) {
   const editando = !!categoria;
 
   const [icone, setIcone] = useState(categoria?.icone ?? "");
-  const [titulo, setTitulo] = useState(categoria?.titulo ?? "");
-  const [rotulo, setRotulo] = useState(categoria?.rotulo ?? "");
+  const [nome, setNome] = useState(categoria?.nome ?? "");
+  const [grupo, setGrupo] = useState(categoria?.grupo ?? "");
   const [tipoAlvo, setTipoAlvo] = useState(
     categoria?.tipoAlvo == null ? "" : String(categoria.tipoAlvo)
   );
@@ -31,8 +31,8 @@ export default function TelaEditarCategoria({ navigation, route }) {
     const categoriaFormulario = {
       ...(categoria?.id == null ? {} : { id: categoria.id }),
       icone,
-      titulo,
-      rotulo,
+      nome,
+      grupo,
       tipoAlvo: Number(tipoAlvo) || 0,
       alvo: Number(alvo) || 0,
 
@@ -66,7 +66,7 @@ export default function TelaEditarCategoria({ navigation, route }) {
   return (
     <View style={styles.container}>
       <View style={{ flexDirection: "row", justifyContent: "space-between", alignItems: "center" }}>
-        <Text style={styles.titulo}>
+        <Text style={styles.nome}>
           {editando ? "Editar categoria" : "Nova categoria"}
         </Text>
         <TouchableOpacity style={styles.botaoVoltar} onPress={() => navigation.goBack()}>
@@ -81,18 +81,18 @@ export default function TelaEditarCategoria({ navigation, route }) {
         onChangeText={setIcone}
       />
 
-      <Text style={styles.label}>Categoria</Text>
-      <TextInput
-        style={styles.input}
-        value={titulo}
-        onChangeText={setTitulo}
-      />
-
       <Text style={styles.label}>Nome</Text>
       <TextInput
         style={styles.input}
-        value={rotulo}
-        onChangeText={setRotulo}
+        value={nome}
+        onChangeText={setNome}
+      />
+
+      <Text style={styles.label}>Grupo</Text>
+      <TextInput
+        style={styles.input}
+        value={grupo}
+        onChangeText={setGrupo}
       />
 
       <Text style={styles.label}>Tipo de alvo</Text>
@@ -111,7 +111,7 @@ export default function TelaEditarCategoria({ navigation, route }) {
         keyboardType="numeric"
       />
 
-      <TouchableOpacity style={styles.botaoSalvar} onPress={handleSalvar}> 
+      <TouchableOpacity style={styles.botaoSalvar} onPress={handleSalvar}>
         <Text style={styles.textoBotao}>{editando ? "Salvar alterações" : "Criar categoria"}</Text>
       </TouchableOpacity>
 
@@ -136,7 +136,7 @@ const styles = StyleSheet.create({
     padding: 20,
   },
 
-  titulo: {
+  nome: {
     color: "#fff",
     fontSize: 24,
     fontWeight: "600",
@@ -182,7 +182,7 @@ const styles = StyleSheet.create({
     marginTop: 20,
     alignItems: "center",
   },
-  
+
   textoBotao: {
     color: "#fff",
     fontWeight: "bold",

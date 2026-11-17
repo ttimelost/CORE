@@ -1,5 +1,6 @@
 import { memo, useState } from "react";
 import {
+  Alert,
   Text,
   TextInput,
   StyleSheet,
@@ -31,8 +32,23 @@ export default function TelaEditarTransacao({ navigation, route }) {
   );
   const [id_conta, setId_conta] = useState(transacao?.id_conta ?? "");
   const [data, setData] = useState(transacao?.data ?? "");
+  const [erro, setErro] = useState("");
 
-  const handleSalvar = () => {
+  function validar() {
+    if (!id_categoria || !id_conta) {
+      return "Selecione uma categoria e uma conta.";
+    }
+
+    return "";
+  }
+
+  const handleSalvar = async () => {
+    const mensagemErro = validar();
+    if (mensagemErro) {
+      setErro(mensagemErro);
+      return;
+    }
+
     const transacaoFormulario = {
       id: transacao?.id ?? String(Date.now()),
       valor,
@@ -43,19 +59,29 @@ export default function TelaEditarTransacao({ navigation, route }) {
       data,
     };
 
-    if (editando) {
-      editarTransacao(transacaoFormulario);
-    } else {
-      adicionarTransacao(transacaoFormulario);
+    try {
+      if (editando) {
+        await editarTransacao(transacaoFormulario);
+      } else {
+        await adicionarTransacao(transacaoFormulario);
+      }
+      navigation.goBack();
+    } catch (error) {
+      console.error("Não foi possível salvar a transação.", error);
+      Alert.alert("Erro ao salvar", "Não foi possível salvar a transação.");
     }
-    navigation.goBack();
   };
 
-  function handleRemover() {
+  async function handleRemover() {
     if (!transacao) return;
 
-    removerTransacao(transacao.id);
-    navigation.goBack();
+    try {
+      await removerTransacao(transacao.id);
+      navigation.goBack();
+    } catch (error) {
+      console.error("Não foi possível remover a transação.", error);
+      Alert.alert("Erro ao remover", "Não foi possível remover a transação.");
+    }
   }
 
   return (
@@ -103,10 +129,11 @@ export default function TelaEditarTransacao({ navigation, route }) {
         placeholder="MEMO"
       />
 
-      <TouchableOpacity style={styles.botaoSalvar} onPress={handleSalvar}>
+      <TouchableOpacity style={styles.input} onPress={handleSalvar}>
         <Text style={styles.textoBotao}>{editando ? "Salvar alterações" : "Criar transacao"}</Text>
       </TouchableOpacity>
-      <TouchableOpacity style={styles.botaoApagar} onPress={handleRemover}>
+      {erro ? <Text style={styles.erro}>{erro}</Text> : null}
+      <TouchableOpacity style={styles.input} onPress={handleRemover}>
         <Text style={styles.textoBotao}>Apabar</Text>
       </TouchableOpacity>
 
@@ -115,17 +142,22 @@ export default function TelaEditarTransacao({ navigation, route }) {
       {categorias.map((categoria) => (
         <TouchableOpacity
           key={categoria.id}
-          onPress={() => setId_categoria(categoria.id)}
+          onPress={() => {
+            setId_categoria(categoria.id);
+            setErro("");
+          }}
           style={{
             padding: 12,
             marginBottom: 6,
             borderRadius: 8,
             backgroundColor:
-              id_categoria === categoria.id ? "#356859" : "#28292e",
+              String(id_categoria) === String(categoria.id)
+                ? "#356859"
+                : "#28292e",
           }}
         >
           <Text style={{ color: "#fff" }}>
-            {categoria.icone} {categoria.rotulo}
+            {categoria.icone} {categoria.nome}
           </Text>
         </TouchableOpacity>
       ))}
@@ -134,7 +166,10 @@ export default function TelaEditarTransacao({ navigation, route }) {
       {contas.map((conta) => (
         <TouchableOpacity
           key={conta.id}
-          onPress={() => setId_conta(conta.id)}
+          onPress={() => {
+            setId_conta(conta.id);
+            setErro("");
+          }}
           style={{
             padding: 12,
             marginBottom: 6,
@@ -175,4 +210,11 @@ const styles = StyleSheet.create({
     marginTop: 12,
     marginBottom: 5,
   },
+  input: {
+    backgroundColor: "#fff",
+  },
+  erro: {
+    color: "#ff6b6b",
+    marginTop: 8,
+  }
 });

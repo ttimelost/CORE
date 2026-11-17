@@ -11,7 +11,9 @@ export function abrirBanco() {
       const database = await SQLite.openDatabaseAsync(DATABASE_NAME);
 
       try {
-        await database.execAsync("PRAGMA foreign_keys = ON;"); // pra references precisa disso
+        await database.execAsync(`
+          PRAGMA foreign_keys = ON;
+        `); // pra references precisa disso
         await inicializarBanco(database);
 
         return database;
@@ -53,12 +55,12 @@ async function inicializarBanco(database) {
 
     CREATE TABLE IF NOT EXISTS categorias (
       id INTEGER PRIMARY KEY AUTOINCREMENT,
-      rotulo TEXT NOT NULL,
+      nome TEXT NOT NULL,
       icone TEXT NOT NULL,
       alvo INTEGER,
       tipoAlvo INTEGER,
       atribuido INTEGER NOT NULL,
-      titulo TEXT NOT NULL
+      grupo TEXT NOT NULL
     );
 
     CREATE TABLE IF NOT EXISTS transacoes (
@@ -71,4 +73,31 @@ async function inicializarBanco(database) {
       memo TEXT
     );
   `);
+
+  const colunasCategoria = await database.getAllAsync(`
+    PRAGMA table_info(categorias);
+  `);
+  const nomesColunasCategoria = new Set(
+    colunasCategoria.map((coluna) => coluna.name)
+  );
+
+  if (
+    nomesColunasCategoria.has("rotulo") &&
+    !nomesColunasCategoria.has("nome")
+  ) {
+    await database.execAsync(`
+      ALTER TABLE categorias
+      RENAME COLUMN rotulo TO nome;
+    `);
+  }
+
+  if (
+    nomesColunasCategoria.has("titulo") &&
+    !nomesColunasCategoria.has("grupo")
+  ) {
+    await database.execAsync(`
+      ALTER TABLE categorias
+      RENAME COLUMN titulo TO grupo;
+    `);
+  }
 }

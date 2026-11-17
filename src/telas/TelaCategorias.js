@@ -13,10 +13,10 @@ import { useCategorias } from "../contexts/CategoriasContext";
 export default function TelaCategorias({ navigation }) {
   const { categorias } = useCategorias();
 
-  const sections = Array.from(new Set(categorias.map((item) => item.titulo))).map(
-    (titulo) => ({
-      titulo,
-      data: categorias.filter((item) => item.titulo === titulo),
+  const sections = Array.from(new Set(categorias.map((item) => item.grupo))).map(
+    (grupo) => ({
+      grupo,
+      data: categorias.filter((item) => item.grupo === grupo),
     })
   );
 
@@ -41,7 +41,7 @@ export default function TelaCategorias({ navigation }) {
         contentContainerStyle={styles.contentList}
         renderSectionHeader={({ section }) => (
           <ComponenteSuperCategoria
-            rotulo={section.titulo}
+            grupo={section.grupo}
             navigation={navigation}
           />
         )}

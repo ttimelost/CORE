@@ -4,7 +4,6 @@ import { StyleSheet, Text, View, Image, TextInput, TouchableOpacity } from "reac
 export default function TelaRegistro({ navigation }) {
   const [password, setPassword] = useState("");
   const [erro, setErro] = useState(undefined);
-  const [isLoading, setIsLoading] = useState(true);
 
   function validar() {
     if (password.length < 6)

@@ -22,3 +22,13 @@ export function mesmoMes(data, referencia = new Date()) {
     dataComparada.getFullYear() === referencia.getFullYear()
   );
 }
+
+export function somarTransacoesDoMes(transacoes, campoId, id, referencia) {
+  return transacoes
+    .filter(
+      (transacao) =>
+        String(transacao[campoId]) === String(id) &&
+        mesmoMes(transacao.data, referencia)
+    )
+    .reduce((total, transacao) => total + Number(transacao.valor || 0), 0);
+}

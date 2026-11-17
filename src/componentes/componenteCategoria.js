@@ -26,7 +26,7 @@ function calcularStatusMeta(alvo, atribuido) {
 export default function ComponenteCategoria({ categoria, navigation }) {
   const {
     icone,
-    rotulo,
+    nome,
     tipoAlvo,
     alvo,
     atribuido,
@@ -50,8 +50,7 @@ export default function ComponenteCategoria({ categoria, navigation }) {
       <View style={styles.cardContainer}>
 
         <View style={{ flexDirection: "row", justifyContent: "space-between", marginBottom: 30 }}>
-          <Text style={styles.cardTitle}>{icone}</Text>
-          <Text style={styles.cardTitle}>{rotulo}</Text>
+          <Text style={styles.cardTitle}>{icone} {nome}</Text>
         </View>
 
         <View style={{ flexDirection: "row", justifyContent: "space-between", marginBottom: 10 }}>
