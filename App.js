@@ -6,6 +6,7 @@ import { CategoriasProvider } from './src/contexts/CategoriasContext';
 import { EducacaoProvider } from './src/contexts/EducacaoContext'
 import { TransacoesProvider } from './src/contexts/TransacoesContext';
 import { ContasProvider } from './src/contexts/ContasContext';
+import { AtribuidosProvider } from './src/contexts/AtribuidosContext';
 
 const NavegadorAtual = NavegacaoStack
 
@@ -31,11 +32,13 @@ export default function App() {
     <NavigationContainer>
       <TransacoesProvider>
         <ContasProvider>
-          <CategoriasProvider>
-            <EducacaoProvider>
-              <NavegacaoStack />
-            </EducacaoProvider>
-          </CategoriasProvider>
+          <AtribuidosProvider>
+            <CategoriasProvider>
+              <EducacaoProvider>
+                <NavegacaoStack />
+              </EducacaoProvider>
+            </CategoriasProvider>
+          </AtribuidosProvider>
         </ContasProvider>
       </TransacoesProvider>
     </NavigationContainer>
